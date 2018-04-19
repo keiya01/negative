@@ -1,0 +1,74 @@
+// Place all the styles related to the posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// index
+.post-page{
+	height: 100%;
+	width: 100%;
+	background-color: #fff;
+	padding-top: 50px;
+	padding-bottom: 20px;
+}
+.post{
+	height: 100%;
+	width: 90%;
+	margin: 0 auto;
+	margin-top: 20px;
+	box-shadow: 1px 2px 5px #ccc;
+	padding: 5px;
+	cursor: pointer;
+}
+.post-body{
+	height: 100%;
+	width: 100%;
+	min-height: 100px;
+}
+.post-body p{
+	line-height: 1.7;
+	font-size: 15px;
+	letter-spacing: 0.08em;
+	color: #333;
+	word-wrap: break-word;
+	padding: 0 5px;
+	padding-top: 5px;
+}
+.post-menu{
+	border-top: 1px solid #eee;
+	margin-top: 10px;
+	padding-top: 5px;
+}
+.post-user{
+	float: left;
+	color: #555;
+	font-size: 15px;
+	padding-left: 5px;
+}
+.post-time{
+	float: right;
+	color: #aaa;
+	font-size: 13px;
+	padding-right: 5px;
+}
+
+// post form
+.post-form{
+	height: 100%;
+	width: 90%;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+.post-form textarea{
+	height: 200px;
+	width: 100%;
+	padding: 15px;
+	border-radius: 20px;
+	border: 1.5px solid #B6FF01;
+}
+.post-form textarea:focus{
+	outline: none;
+}
+.post-form input[type="submit"]{
+	float: right;
+	margin-right: 10px;
+}

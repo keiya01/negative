@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    meta charset="UTF-8"
+    meta name="description" content="ネガティブな感情を打ち明けて、多くの人に励ましてもらうサービスです。"
+    meta http-equiv="X-UA-Compatible" content="IE=edge"
+    meta name="viewport" content="width=device-width,initial-scale=1"
+
+    title NegativeBreaker
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    header
+      - uri = request.path
+      h3 N
+      p.header-menu
+        i.fa.fa-bars
+      - if uri != '/posts/new'
+        p.header-post = link_to 'つぶやく', '/posts/new', class: 'border-none btn-black'
+      -else
+        p.header-post = link_to 'トップへ', '/', class: 'border-none btn-black'
+  = yield

@@ -1,0 +1,10 @@
+.post-page
+  = render partial: 'post'
+  = paginate @posts
+
+#modal
+  #delete-modal
+    h3 本当にブレークしますか？
+    .btn-zone
+      p = link_to 'はい', '/', class: 'common-delete-btn delete-btn border-none btn-white', method: 'post'
+      p.common-delete-btn.undelete-btn いいえ
