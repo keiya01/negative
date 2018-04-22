@@ -16,8 +16,11 @@ html
       h3 N
       p.header-menu
         i.fa.fa-bars
-      - if uri != '/posts/new'
-        p.header-post = link_to 'つぶやく', '/posts/new', class: 'border-none btn-black'
-      -else
+      - if uri == '/posts/new' || uri == '/posts/create'
         p.header-post = link_to 'トップへ', '/', class: 'border-none btn-black'
+      -else
+        p.header-post = link_to 'つぶやく', '/posts/new', class: 'border-none btn-black'
+    - if flash[:notice]
+      .flash#flash-head
+        p = flash[:notice]
   = yield

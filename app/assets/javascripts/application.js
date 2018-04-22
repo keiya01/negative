@@ -32,4 +32,14 @@ $(document).on('turbolinks:load', function() {
 	    $('html, body').css('overflow', 'auto');
 	});
 
+	// flash
+	function headerFlash(flash){
+		if($(flash).length){
+			$(flash).fadeIn(2000);
+			setTimeout(function(){
+				$(flash).fadeOut(1000);
+			},3000);
+		};
+	};
+	headerFlash("#flash-head");
 });

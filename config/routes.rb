@@ -4,5 +4,8 @@ Rails.application.routes.draw do
   post 'posts/create' => 'posts#create'
   post 'posts/:id/destroy' => 'posts#destroy'
 
+  get 'users/new' => 'users#new'
+  get 'auth/:provider/callback' => 'users#create'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

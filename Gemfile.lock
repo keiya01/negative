@@ -73,6 +73,7 @@ GEM
       railties (>= 3.2, < 6.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    hashie (3.5.7)
     hirb (0.7.3)
     hirb-unicode (0.0.5)
       hirb (~> 0.5)
@@ -105,6 +106,16 @@ GEM
     nio4r (2.3.0)
     nokogiri (1.8.2-x86-mingw32)
       mini_portile2 (~> 2.3.0)
+    oauth (0.5.4)
+    omniauth (1.8.1)
+      hashie (>= 3.4.6, < 3.6.0)
+      rack (>= 1.6.2, < 3)
+    omniauth-oauth (1.1.0)
+      oauth
+      omniauth (~> 1.0)
+    omniauth-twitter (1.4.0)
+      omniauth-oauth (~> 1.1)
+      rack
     pg (0.21.0-x86-mingw32)
     public_suffix (3.0.2)
     puma (3.11.4)
@@ -211,6 +222,8 @@ DEPENDENCIES
   jquery-rails (~> 4.3, >= 4.3.1)
   jquery-turbolinks
   kaminari (~> 0.17.0)
+  omniauth
+  omniauth-twitter
   pg (~> 0.18)
   puma (~> 3.7)
   rails (~> 5.1.6)
