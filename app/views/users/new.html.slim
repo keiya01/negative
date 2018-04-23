@@ -1,4 +1,19 @@
 .user-page
+  .user-top
+    h1 Negative Breaker
+    p
+     | ■今までとは違う、投稿が淘汰されるSNS！
+     br
+     | ■自分に必要のない投稿だと感じたらタップ！
+     br
+     | ■3回タップされると投稿は削除されます！
   .user-form
-    p = link_to '利用規約', '/', class: 'agreement-btn'
-    p = link_to 'Twitterでログイン', '/auth/twitter', class: 'twitter-btn'
+    h3 Sign Up
+    p.agreement-text
+      | 登録することで
+      = link_to '利用規約', '/', class: 'agreement-btn border-none'
+      | に同意したものとします。
+    = link_to '/auth/twitter', class: 'border-none' do
+      p.twitter-btn
+        i.fa.fa-twitter
+        | Twitterで登録する

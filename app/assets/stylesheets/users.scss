@@ -1,3 +1,105 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user-page{
+	height: 100%;
+	width: 100%;
+	padding-top: 50px;
+}
+.user-top{
+	display: none;
+}
+.user-form{
+	width: 80%;
+	height: 100%;
+	max-width: 480px;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 100px;
+	border: 3px solid #B6FF01;
+	padding: 20px 10px;
+}
+.user-form h3{
+	padding-bottom: 30px;
+	font-size: 23px;
+}
+.agreement-text{
+	font-size: 15px;
+	color: #333;
+	padding-bottom: 10px;
+}
+.agreement-btn{
+	color: tomato;
+}
+.twitter-btn{
+	display: inline-block;
+	background-color: #00aced;
+	padding: 5px 15px;
+	color: #fff;
+	border-radius: 20px;
+}
+.twitter-btn i{
+	padding-right: 5px;
+}
+@media screen and (min-width: 960px){
+	.user-top{
+		display: block;
+		// background: inner-gradient(to left, #B6FF01, #fff);
+		background-color: #B6FF01;
+		position: fixed;
+		top: 0;
+		right: 45%;
+		bottom: 0;
+		left: 0;
+		padding-top: 120px;
+		padding-left: 100px;
+		overflow: hidden;
+	}
+	.user-top h1{
+		font-size: 40px;
+		color: #fff;
+		padding-bottom: 30px;
+	}
+	.user-top p{
+		padding-left: 50px;
+		font-size: 15px;
+		line-height: 40px;
+	}
+	.user-form{
+		height: 0;
+		width: 45%;
+		margin-top: 0;
+		border: none;
+		padding: 0px;
+		position: absolute;
+		top: 50%;
+		right: 0;
+	}
+	.user-form h3{
+		font-size: 30px;
+		color: #B6FF01;
+	}
+}
+@media screen and (min-width: 1281px){
+	.user-top{
+		display: block;
+		// background: inner-gradient(to left, #B6FF01, #fff);
+		background-color: #B6FF01;
+		position: fixed;
+		top: 0;
+		right: 45%;
+		bottom: 0;
+		left: 0;
+	}
+	.user-top h1{
+		font-size: 50px;
+	}
+	.user-top p{
+		padding-left: 150px;
+		font-size: 17px;
+	}
+	.user-form{
+		right: 5%;
+	}
+}

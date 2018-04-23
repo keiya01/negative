@@ -11,16 +11,17 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    header
-      - uri = request.path
-      h3 N
-      p.header-menu
-        i.fa.fa-bars
-      - if uri == '/posts/new' || uri == '/posts/create'
-        p.header-post = link_to 'トップへ', '/', class: 'border-none btn-black'
-      -else
-        p.header-post = link_to 'つぶやく', '/posts/new', class: 'border-none btn-black'
-    - if flash[:notice]
-      .flash#flash-head
-        p = flash[:notice]
+    - uri = request.path
+    - if uri != '/signup'
+      header
+        h3 N
+        p.header-menu
+          i.fa.fa-bars
+        - if uri == '/posts/new' || uri == '/posts/create'
+          p.header-post = link_to 'トップへ', '/', class: 'border-none btn-black'
+        -else
+          p.header-post = link_to 'つぶやく', '/posts/new', class: 'border-none btn-black'
+      - if flash[:notice]
+        .flash#flash-head
+          p = flash[:notice]
   = yield

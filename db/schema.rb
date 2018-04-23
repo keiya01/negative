@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180422222831) do
+ActiveRecord::Schema.define(version: 20180423210421) do
 
   create_table "posts", force: :cascade do |t|
     t.text "body"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20180422222831) do
     t.string "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image"
   end
 
 end
