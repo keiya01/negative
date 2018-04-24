@@ -5,24 +5,39 @@
 .user-page{
 	height: 100%;
 	width: 100%;
-	padding-top: 50px;
 }
 .user-top{
-	display: none;
+	background-color: #B6FF01;
+	overflow: hidden;
+	text-align: center;
+	padding: 50px 0;
+}
+.user-top h1{
+	font-size: 30px;
+	color: #fff;
+	padding-top: 30px;
+	padding-bottom: 20px;
+}
+.top-text{
+	display: inline-block;
+}
+.top-text p{
+	text-align: left;
+	font-size: 15px;
+	line-height: 30px;
 }
 .user-form{
-	width: 80%;
+	display: inline-block;
+	width: 100%;
 	height: 100%;
-	max-width: 480px;
-	margin: 0 auto;
+	background-color: #fff;
 	text-align: center;
-	margin-top: 100px;
-	border: 3px solid #B6FF01;
-	padding: 20px 10px;
 }
 .user-form h3{
+	padding-top: 70px;
 	padding-bottom: 30px;
-	font-size: 23px;
+	font-size: 30px;
+	color: #B6FF01;
 }
 .agreement-text{
 	font-size: 15px;
@@ -44,6 +59,7 @@
 }
 @media screen and (min-width: 960px){
 	.user-top{
+		padding: 0;
 		display: block;
 		// background: inner-gradient(to left, #B6FF01, #fff);
 		background-color: #B6FF01;
@@ -53,32 +69,38 @@
 		bottom: 0;
 		left: 0;
 		padding-top: 120px;
-		padding-left: 100px;
+		padding-left: 60px;
 		overflow: hidden;
+		text-align: none;
 	}
 	.user-top h1{
-		font-size: 40px;
+		font-size: 50px;
 		color: #fff;
 		padding-bottom: 30px;
 	}
 	.user-top p{
-		padding-left: 50px;
+		padding-left: 80px;
 		font-size: 15px;
 		line-height: 40px;
 	}
 	.user-form{
-		height: 0;
-		width: 45%;
+		height: 400px;
+		width: 400px;
 		margin-top: 0;
-		border: none;
+		background-color: #B6FF01;
 		padding: 0px;
+		padding-top: 80px;
 		position: absolute;
-		top: 50%;
-		right: 0;
+		top: 20%;
+		right: 3%;
+		border-radius: 50%;
 	}
 	.user-form h3{
-		font-size: 30px;
-		color: #B6FF01;
+		padding: 0;
+		font-size: 50px;
+		color: #fff;
+		padding-top: 30px;
+		padding-bottom: 30px;
 	}
 }
 @media screen and (min-width: 1281px){
@@ -100,6 +122,6 @@
 		font-size: 17px;
 	}
 	.user-form{
-		right: 5%;
+		right: 7%;
 	}
 }

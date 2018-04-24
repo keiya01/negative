@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :brock_current_user
 
 	def new
 	end

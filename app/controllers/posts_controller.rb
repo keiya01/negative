@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
 	before_action :post_params, {only:[:create]}
+  before_action :brock_not_current_user, {only:[:new, :create]}
 
   def index
   	@posts = Post.page(params[:page]).per(15).order(created_at: "DESC")

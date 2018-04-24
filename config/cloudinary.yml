@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: hpm8l9bqu
+  api_key: '614829442928141'
+  api_secret: 6ZgVNNMCR729FclOS93Gmmoh3Os
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: hpm8l9bqu
+  api_key: '614829442928141'
+  api_secret: 6ZgVNNMCR729FclOS93Gmmoh3Os
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: hpm8l9bqu
+  api_key: '614829442928141'
+  api_secret: 6ZgVNNMCR729FclOS93Gmmoh3Os
+  enhance_image_tag: true
+  static_image_support: false
