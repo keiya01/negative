@@ -73,6 +73,10 @@ textarea{
 	font-size: 18px;
 	padding-top: 30px;
 }
+#delete-modal p{
+	font-size: 15px;
+	color: #333;
+}
 #delete-modal .btn-zone{
 	display: block;
 	padding: 0 50px;
@@ -87,12 +91,29 @@ textarea{
 	margin-top: 80px;
 	cursor: pointer;
 }
+.common-sign-btn{
+	color: white;
+	display: inline-block;
+	font-size: 15px;
+	padding: 8px 25px;
+	border-radius: 30px;
+	margin-top: 50px;
+	cursor: pointer;
+}
 .delete-btn{
 	background-color: tomato;
 	float: left;
 }
+.signup-btn{
+	background-color: #B6FF01;
+	float: left;
+}
 .undelete-btn{
 	background-color: #aaa;
+	float: right;
+}
+.twitter-btn{
+	background-color: #B6FF01;
 	float: right;
 }
 
@@ -178,8 +199,9 @@ header h3{
 /*flash*/
 .flash{
 	display: none;
-	width: 200px;
-	height: 100px;
+	width: 250px;
+	height: 150px;
+	padding: 10px;
 	position: fixed;
 	right: 10px;
 	top: 60px;
@@ -189,7 +211,7 @@ header h3{
 	box-shadow: 2px 3px 5px #ccc;
 }
 .flash p{
-	line-height: 100px;
+	line-height: 130px;
 	font-weight: bold;
 	font-size: 15px;
 }
@@ -200,7 +222,7 @@ footer{
 	bottom: 0;
 	right: 0;
 	left: 0;
-	height: 50px;
+	height: 80px;
 	width: 100%;
 	background-color: #fff;
 	border-top: 1px solid #ccc;
@@ -212,12 +234,12 @@ footer{
 	margin: 0 auto;
 }
 .footer-btn p{
-	line-height: 50px;
+	line-height: 80px;
 	font-size: 15px;
 }
 .footer-btn a{
 	background-color: #B6FF01;
-	padding: 5px 15px;
+	padding: 10px 20px;
 	border-radius: 30px;
 }
 .footer-signup{

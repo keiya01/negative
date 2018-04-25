@@ -2,9 +2,19 @@
   = render partial: 'post'
   = paginate @posts
 
-#modal
-  #delete-modal
-    h3 本当にブレークしますか？
-    .btn-zone
-      p = link_to 'はい', '/', class: 'common-delete-btn delete-btn border-none btn-white', method: 'post'
-      p.common-delete-btn.undelete-btn いいえ
+- if @current_user
+  #modal
+    #delete-modal
+      h3 コメントを残すとブレークできます。
+      = form_for @comment url: comments_create_path do |f|
+      .btn-zone
+        p = link_to 'はい', '/', class: 'common-delete-btn delete-btn border-none btn-white', method: 'post'
+        p.common-delete-btn.undelete-btn いいえ
+- else
+  #modal
+    #delete-modal
+      h3 ユーザー登録・ログインをしてください。
+      p Twitterで1分で登録！
+      .btn-zone
+        p = link_to '登録', '/signup', class: 'common-sign-btn signup-btn border-none btn-white', method: 'post'
+        p = link_to 'ログイン', '/auth/twitter', class: 'common-sign-btn twitter-btn border-none btn-white', method: 'post'

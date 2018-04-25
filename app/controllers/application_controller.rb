@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   def brock_not_current_user
   	unless @current_user
-  		flash[:notice] = "ログインまたは新規登録をしてください。"
+  		flash[:notice] = "ログインしてください。"
   		redirect_to("/")
   	end
   end
