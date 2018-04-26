@@ -5,4 +5,5 @@
   = form_for @post, url: posts_create_path do |f|
     .post-form
   	  = f.text_area :body, placeholder: '今日の出来事は？', maxlength: 150
+  	  = f.hidden_field :user_id, value: @current_user.id
   	  = f.submit value: 'つぶやく', data: { disable_with: "送信中..." }, class: 'button-simple'

@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   post 'posts/create' => 'posts#create'
   post 'posts/:id/destroy' => 'posts#destroy'
 
+  post 'comments/:id/create' => 'comments#create'
+
   get 'signup' => 'users#new'
   get 'auth/:provider/callback' => 'users#create'
 

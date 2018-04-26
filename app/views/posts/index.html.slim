@@ -6,15 +6,16 @@
   #modal
     #delete-modal
       h3 コメントを残すとブレークできます。
-      = form_for @comment url: comments_create_path do |f|
-      .btn-zone
-        p = link_to 'はい', '/', class: 'common-delete-btn delete-btn border-none btn-white', method: 'post'
-        p.common-delete-btn.undelete-btn いいえ
+      = form_tag "#" do
+        textarea name="body" placeholder='コメントを残そう!' maxlength='150'
+        .btn-zone
+          input type="submit" value='コメントする' disable_with="送信中..." class='common-delete-btn delete-btn border-none btn-white'
+          p.common-delete-btn.undelete-btn いいえ
 - else
   #modal
     #delete-modal
       h3 ユーザー登録・ログインをしてください。
       p Twitterで1分で登録！
       .btn-zone
-        p = link_to '登録', '/signup', class: 'common-sign-btn signup-btn border-none btn-white', method: 'post'
-        p = link_to 'ログイン', '/auth/twitter', class: 'common-sign-btn twitter-btn border-none btn-white', method: 'post'
+        p = link_to '登録', '/signup', class: 'common-sign-btn signup-btn border-none btn-white'
+        p = link_to 'ログイン', '/auth/twitter', class: 'common-sign-btn login-btn border-none btn-white'

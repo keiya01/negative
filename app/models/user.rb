@@ -3,7 +3,7 @@ class User < ApplicationRecord
   validates :provider, presence: true
   validates :uid, presence: true
   validates :username, presence: true
-  validates :email, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, allow_blank: true
+  # validates :email, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, allow_blank: true
 
   def self.find_or_create_from_auth_hash(auth_hash)
    provider = auth_hash[:provider]

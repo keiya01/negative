@@ -23,7 +23,7 @@ $(document).on('turbolinks:load', function() {
 	// delete modal
 	$('.post').on('click', function(){
 		var $data = $(this).data('id');
-		$('#delete-modal').find('a').attr('href', '/posts/'+$data+'/destroy');
+		$('#delete-modal').find('form').attr('action', '/comments/'+$data+'/create');
 		$('#modal').show();
 		$('html, body').css('overflow', 'hidden');
 	});

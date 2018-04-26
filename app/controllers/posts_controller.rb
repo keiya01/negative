@@ -4,6 +4,7 @@ class PostsController < ApplicationController
 
   def index
   	@posts = Post.page(params[:page]).per(15).order(created_at: "DESC")
+    @comment = Comment.new
   end
 
   def new
@@ -22,13 +23,8 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
-    @post.count = 0 if @post.count == nil
-    if @post.count == 2
+    if @post
       @post.destroy
-      redirect_to '/'
-    elsif @post.count < 3
-      @post.count += 1
-      @post.save
       redirect_to '/'
     else
       flash[:notice] = "エラーが発生しました。"
@@ -38,6 +34,6 @@ class PostsController < ApplicationController
 
   private
    def post_params
-   	 params.require('post').permit(:body)
+   	 params.require('post').permit(:body, :user_id)
    end
 end
