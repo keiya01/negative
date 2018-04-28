@@ -36,9 +36,16 @@
 .post-question{
 	font-size: 13px;
 }
+.post-count{
+	padding-top: 10px;
+	padding-right: 5px;
+	font-size: 14px;
+	color: #aaa;
+	font-weight: bold;
+	float: right;
+}
 .post-menu{
 	border-top: 1px solid #eee;
-	margin-top: 10px;
 	padding-top: 5px;
 }
 .post-user{
@@ -140,8 +147,10 @@
 	border: 1.5px solid blue;
 }
 .post-form input[type="submit"]{
-	float: right;
-	margin-right: 10px;
+	display: block;
+	width: 100%;
+	margin: 0 auto;
+	margin-top: 50px;
 	border: 1px solid #B6FF01;
 }
 .post-form input[type="submit"]:focus{
@@ -173,6 +182,16 @@
 }
 
 @media screen and (min-width: 480px){
+	// form
+	.post-form input[type="submit"]{
+		width: 40%;
+		margin: 0;
+		float: right;
+		margin-right: 10px;
+		border: 1px solid #B6FF01;
+	}
+
+	// modal
 	#delete-modal h3{
 		padding: 0;
 		padding-top: 30px;

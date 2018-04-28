@@ -9,6 +9,10 @@ class PostsController < ApplicationController
   end
 
   def show
+    if session[:post_id] != @post.id
+      flash[:notice] = "問題に答えてください。"
+      redirect_to '/'
+    end
   end
 
   def new
@@ -16,7 +20,7 @@ class PostsController < ApplicationController
   end
 
   def create
-  	@post = Post.new(post_params)
+  	@post = Post.new(post_params, check_count: 0)
   	if @post.save
   		flash[:notice] = '投稿しました。'
   		redirect_to '/'
@@ -38,11 +42,12 @@ class PostsController < ApplicationController
   def check_answer
     user_answer = params[:answer]
     @post.check_count = 0 if @post.check_count == nil
-    if @post.check_count <= @post.count
+    if @post.check_count < @post.count
       if @post.answer == user_answer
         @post.check_count += 1
         @post.save
         flash[:notice] ='正解です！！'
+        session[:post_id] = @post.id
         redirect_to "/posts/#{@post.id}"
       else
         flash[:notice] = '不正解です！！'

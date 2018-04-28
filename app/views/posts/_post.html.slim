@@ -1,8 +1,16 @@
 - @posts.each do |post|
-  .post data-id="#{post.id}" data-question="#{post.question}"
-    .post-contents
-      p.post-question = html_escape(post.question).gsub(/\n/, '<br>').html_safe
-    .post-menu
-      p.post-user = @current_user.username
-      p.post-time = simple_time(post.created_at)
+  - @user = User.find(post.user_id)
+  - if post.count > post.check_count
+    .post data-id="#{post.id}" data-question="#{post.question}"
+      .post-contents
+        p.post-question = html_escape(post.question).gsub(/\n/, '<br>').html_safe
+      p.post-count
+       = post.check_count
+       | /
+       = post.count
+       | 人が正解
       .clear-right
+      .post-menu
+        p.post-user = @user.username
+        p.post-time = simple_time(post.created_at)
+        .clear-right

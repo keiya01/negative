@@ -29,7 +29,7 @@ $(document).on('turbolinks:load', function() {
 		$('#modal').show();
 		$('html, body').css('overflow', 'hidden');
 	});
-	$('.common-delete-btn').on('click', function(){
+	$('.undelete-btn').on('click', function(){
 		$('#modal').hide();
 	    $('html, body').css('overflow', 'auto');
 	});
