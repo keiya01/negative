@@ -2,7 +2,6 @@
   .post data-id="#{post.id}"
     .post-body
       p.post-body = html_escape(post.body).gsub(/\n/, '<br>').html_safe
-      p = post.count
     .post-menu
       p.post-user test
       p.post-time = simple_time(post.created_at)
