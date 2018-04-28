@@ -1,0 +1,8 @@
+.post-page
+  .post-show
+    .post-contents
+      p.post-body = html_escape(@post.body).gsub(/\n/, '<br>').html_safe
+    .post-menu
+      p.post-user = @current_user.username
+      p.post-time = simple_time(@post.created_at)
+      .clear-right

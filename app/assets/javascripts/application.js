@@ -22,8 +22,10 @@
 $(document).on('turbolinks:load', function() {
 	// delete modal
 	$('.post').on('click', function(){
-		var $data = $(this).data('id');
-		$('#delete-modal').find('form').attr('action', '/comments/'+$data+'/create');
+		var $id = $(this).data('id');
+		var $question = $(this).data('question');
+		$('#delete-modal').find('form').attr('action', '/posts/'+$id+'/check');
+		$('#delete-modal').find('textarea').attr('placeholder', '問題： '+$question);
 		$('#modal').show();
 		$('html, body').css('overflow', 'hidden');
 	});

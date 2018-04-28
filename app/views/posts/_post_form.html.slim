@@ -4,8 +4,10 @@
       p = message
   = form_for @post, url: posts_create_path do |f|
     .post-form
-  	  = f.text_area :body, placeholder: '今日の出来事は？', maxlength: 150
+  	  = f.text_area :body, placeholder: '今日の出来事は？(500文字まで)', maxlength: 500, rows: 15
   	  = f.hidden_field :user_id, value: @current_user.id
-  	  = f.select :count, [[3, '3'],[4, '4'],[5, '5'],[6, '6'],[7, '7'],[8, '8']], prompt: '公開人数を選択して下さい'
+  	  = f.text_area :question, placeholder: '友達だけが知っていることは？(150文字まで) 例：ABC君の誕生日は？', maxlength: 150, rows: 8
+  	  = f.text_area :answer, placeholder: '問題の答えは？(30文字まで)', maxlength: 30, rows: 3
+  	  = f.select :count, [[1, '1'],[2, '2'],[3, '3'],[4, '4'],[5, '5'],[6, '6'],[7, '7'],[8, '8']], prompt: '公開人数を選択して下さい'
   	  br
   	  = f.submit value: 'つぶやく', data: { disable_with: "送信中..." }, class: 'button-simple'

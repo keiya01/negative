@@ -14,9 +14,14 @@ html
     - uri = request.path
     - if uri != '/signup'
       header
+        - if uri != '/'
+          = link_to '/', class: 'border-none btn-black'
+            p.back-btn
+              i.fa.fa-angle-left
+        - else
+          p.header-menu
+            i.fa.fa-bars
         h3 N
-        p.header-menu
-          i.fa.fa-bars
         - if @current_user
           - if uri == '/posts/new' || uri == '/posts/create'
             p.header-post = link_to 'トップへ', '/', class: 'border-none btn-black'

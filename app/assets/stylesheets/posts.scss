@@ -20,19 +20,21 @@
 	padding: 5px;
 	cursor: pointer;
 }
-.post-body{
+.post-contents{
 	height: 100%;
 	width: 100%;
 	min-height: 100px;
 }
-.post-body p{
+.post-contents p{
 	line-height: 1.7;
-	font-size: 13px;
 	letter-spacing: 0.08em;
 	color: #333;
 	word-wrap: break-word;
 	padding: 0 5px;
 	padding-top: 5px;
+}
+.post-question{
+	font-size: 13px;
 }
 .post-menu{
 	border-top: 1px solid #eee;
@@ -86,6 +88,7 @@
 .common-delete-btn{
 	color: white;
 	display: inline-block;
+	width: 80%;
 	font-size: 15px;
 	padding: 8px 25px;
 	border-radius: 30px;
@@ -93,6 +96,7 @@
 }
 .common-sign-btn{
 	color: white;
+	width: 80%;
 	display: inline-block;
 	font-size: 15px;
 	padding: 8px 25px;
@@ -122,12 +126,12 @@
 	width: 90%;
 	max-width: 480px;
 	margin: 0 auto;
-	margin-top: 20px;
+	margin-bottom: 100px;
 }
 .post-form textarea{
-	height: 200px;
 	width: 100%;
 	padding: 15px;
+	margin-top: 5px;
 	border-radius: 20px;
 	border: 1.5px solid #B6FF01;
 }
@@ -147,10 +151,25 @@
 	border: 1px solid #B6FF01;
 	padding: 5px;
 	font-size:14px;
+	margin-top:5px;
 }
 .post-form select:focus{
 	outline: none;
 	border: 1px solid blue;
+}
+
+// show
+.post-show{
+	height: 100%;
+	width: 90%;
+	max-width: 480px;
+	margin: 0 auto;
+	margin-top: 80px;
+	box-shadow: 1px 2px 5px #ccc;
+	padding: 10px 5px;
+}
+.post-body{
+	font-size: 15px;
 }
 
 @media screen and (min-width: 480px){
@@ -158,15 +177,14 @@
 		padding: 0;
 		padding-top: 30px;
 	}
-	#delete-modal .btn-zone{
-		text-align: center;
-	}
 	.common-delete-btn{
 		margin-top: 30px;
+		width: 40%;
 	}
 	.common-sign-btn{
 		margin-top: 0;
 		margin-top: 50px;
+		width: 40%;
 	}
 	.delete-btn{
 		float: left;

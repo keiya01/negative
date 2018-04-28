@@ -1,8 +1,8 @@
 - @posts.each do |post|
-  .post data-id="#{post.id}"
-    .post-body
-      p.post-body = html_escape(post.body).gsub(/\n/, '<br>').html_safe
+  .post data-id="#{post.id}" data-question="#{post.question}"
+    .post-contents
+      p.post-question = html_escape(post.question).gsub(/\n/, '<br>').html_safe
     .post-menu
-      p.post-user test
+      p.post-user = @current_user.username
       p.post-time = simple_time(post.created_at)
       .clear-right

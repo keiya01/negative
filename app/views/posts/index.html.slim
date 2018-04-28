@@ -5,12 +5,12 @@
 - if @current_user
   #modal
     #delete-modal
-      h3 コメントを残すと投稿を見ることができます。
+      h3 問題に正解すると投稿を見ることができます!
       = form_tag "#" do
-        textarea name="body" placeholder='コメントを残そう!' maxlength='150'
+        textarea name="answer" placeholder='' maxlength='150'
         .btn-zone
-          input type="submit" value='コメントする' disable_with="送信中..." class='common-delete-btn delete-btn border-none btn-white'
-          p.common-delete-btn.undelete-btn いいえ
+          input type="submit" value='解答する' disable_with="照合中..." class='common-delete-btn delete-btn border-none btn-white'
+          p.common-delete-btn.undelete-btn やめる
 - else
   #modal
     #delete-modal
