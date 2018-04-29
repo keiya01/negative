@@ -23,11 +23,20 @@ body{
 	margin: 0;
 	padding: 0;
 	width: 100%;
-	font-family:Quicksand, 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+	font-family:-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic",
+		YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial,
+		"メイリオ", Meiryo, sans-serif
+		;
 }
 h1,h2,h3,h4,h5,p,i{
 	margin: 0;
 	padding: 0;
+}
+input, button, textarea{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: none;
 }
 input[type='submit'], button{
 	outline: none;
@@ -41,7 +50,7 @@ textarea{
 
 /*button*/
 .button-simple{
-	background-color: #B6FF01;
+	background-color: #4169e1;
 	padding: 10px 15px;
 	border-radius: 30px;
 	color: #fff;
@@ -112,11 +121,11 @@ header{
 	height: 50px;
 	width: 100%;
 	background-color: #fff;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #ddd;
 }
 header h3{
 	text-align: center;
-	color: #B6FF01;
+	color: #4169e1;
 	font-size: 25px;
 	line-height: 50px;
 	font-family: 'Bangers', cursive;
@@ -125,7 +134,7 @@ header h3{
 	display: inline-block;
 	font-size: 15px;
 	font-weight: 600;
-	background-color: #B6FF01;
+	background-color: #4169e1;
 	padding: 2px 5px;
 	border-radius: 20px;
 	cursor: pointer;
@@ -158,7 +167,7 @@ header h3{
 	right: 10px;
 	top: 60px;
 	z-index: 100px;
-	background-color: #B6FF01;
+	background-color: #4169e1;
 	text-align: center;
 	box-shadow: 2px 3px 5px #ccc;
 }
@@ -169,6 +178,9 @@ header h3{
 }
 
 /*footer*/
+.foot-space{
+	height: 80px;
+}
 footer{
 	position: fixed;
 	bottom: 0;
@@ -178,7 +190,7 @@ footer{
 	height: 80px;
 	width: 100%;
 	background-color: #fff;
-	border-top: 1px solid #ccc;
+	border-top: 1px solid #ddd;
 }
 .footer-btn{
 	width: 80%;
@@ -191,7 +203,7 @@ footer{
 	font-size: 15px;
 }
 .footer-btn a{
-	background-color: #B6FF01;
+	background-color: #4169e1;
 	padding: 10px 20px;
 	border-radius: 30px;
 }
