@@ -6,7 +6,7 @@ html
     meta http-equiv="X-UA-Compatible" content="IE=edge"
     meta name="viewport" content="width=device-width,initial-scale=1"
 
-    title Localf
+    title LOCQER
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
@@ -14,19 +14,18 @@ html
     - uri = request.path
     - if uri != '/signup'
       header
-        - if uri != '/'
-          = link_to '/', class: 'border-none btn-black'
-            p.back-btn
-              i.fa.fa-angle-left
-        - else
-          p.header-menu
-            i.fa.fa-bars
-        h3 Localf
+        h3 = image_tag 'locqer_logo.png'
         - if @current_user
+          - if uri != '/'
+            = link_to '/', class: 'border-none btn-black'
+              p.back-btn
+                i.fa.fa-angle-left
+          - else
+            p.header-menu.header-mypage マイページ
           - if uri == '/posts/new' || uri == '/posts/create'
-            p.header-post = link_to 'トップへ', '/', class: 'border-none btn-black'
+            p.header-menu.header-new = link_to 'トップへ', '/', class: 'border-none btn-black'
           -else
-            p.header-post = link_to 'つぶやく', '/posts/new', class: 'border-none btn-black'
+            p.header-menu.header-new = link_to 'つぶやく', '/posts/new', class: 'border-none btn-black'
       - if flash[:notice]
         .flash#flash-head
           p = flash[:notice]

@@ -9,5 +9,6 @@
   	  = f.text_area :question, placeholder: '友達だけが知っていることは？(150文字まで) 例：ABC君の誕生日は？', maxlength: 150, rows: 8
   	  = f.text_area :answer, placeholder: '問題の答えは？(30文字まで)', maxlength: 30, rows: 3
   	  = f.select :count, [[1, '1'],[2, '2'],[3, '3'],[4, '4'],[5, '5'],[6, '6'],[7, '7'],[8, '8']], prompt: '公開人数を選択して下さい'
+      = f.hidden_field :check_count, value: 0
   	  br
   	  = f.submit value: 'つぶやく', data: { disable_with: "送信中..." }, class: 'button-simple'

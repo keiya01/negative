@@ -11,6 +11,10 @@
        | 人が正解
       .clear-right
       .post-menu
+        - if !@user.image.blank?
+          p.post-user-img = image_tag @user.image.url
+        - else
+          p.post-user-noimg = @user.username[0]
         p.post-user = @user.username
         p.post-time = simple_time(post.created_at)
-        .clear-right
+        .clear-right.clear-left

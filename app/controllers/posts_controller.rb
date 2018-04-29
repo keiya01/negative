@@ -20,7 +20,7 @@ class PostsController < ApplicationController
   end
 
   def create
-  	@post = Post.new(post_params, check_count: 0)
+  	@post = Post.new(post_params)
   	if @post.save
   		flash[:notice] = '投稿しました。'
   		redirect_to '/'
@@ -41,7 +41,6 @@ class PostsController < ApplicationController
 
   def check_answer
     user_answer = params[:answer]
-    @post.check_count = 0 if @post.check_count == nil
     if @post.check_count < @post.count
       if @post.answer == user_answer
         @post.check_count += 1
@@ -61,7 +60,7 @@ class PostsController < ApplicationController
 
   private
    def post_params
-   	 params.require('post').permit(:body, :user_id, :question, :answer, :count)
+   	 params.require('post').permit(:body, :user_id, :question, :answer, :count, :check_count)
    end
 
    def find_post
