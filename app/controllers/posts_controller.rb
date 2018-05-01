@@ -9,6 +9,7 @@ class PostsController < ApplicationController
   end
 
   def show
+  	@user = User.find(@post.user_id)
     if session[:post_id] != @post.id
       flash[:notice] = "問題に答えてください。"
       redirect_to '/'

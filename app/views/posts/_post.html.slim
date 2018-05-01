@@ -1,15 +1,16 @@
 - @posts.each do |post|
   - @user = User.find(post.user_id)
   - if post.count > post.check_count
-    .post data-id="#{post.id}" data-question="#{post.question}"
-      .post-contents
-        p.post-question = html_escape(post.question).gsub(/\n/, '<br>').html_safe
-      p.post-count
-       = post.check_count
-       | /
-       = post.count
-       | 人が正解
-      .clear-right
+    .post
+      .post-box data-id="#{post.id}" data-question="#{post.question}"
+        .post-contents 
+          p.post-question = html_escape(post.question).gsub(/\n/, '<br>').html_safe
+        p.post-count
+         = post.check_count
+         | /
+         = post.count
+         | 人が正解
+        .clear-right
       .post-menu
         - if !@user.image.blank?
           = image_tag @user.image.url, class: 'post-user-img'

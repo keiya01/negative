@@ -1,5 +1,4 @@
 .post-page
-  - @user = User.find(@post.user_id)
   .post-show
     .post-contents
       p.post-body = html_escape(@post.body).gsub(/\n/, '<br>').html_safe

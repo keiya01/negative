@@ -57,6 +57,54 @@
 .twitter-btn i{
 	padding-right: 5px;
 }
+
+// show
+.user-contents{
+	text-align: center;
+	padding-top: 100px;
+	padding-bottom: 30px;
+	width: 100%;
+	height: 100%;
+}
+.user-img{
+	width: 60px;
+	height: 60px;
+	margin: 0 auto;
+	object-fit: cover;
+	border-radius: 50%;
+	margin-bottom: 3px;
+}
+.user-noimg{
+	width: 60px;
+	height: 60px;
+	margin: 0 auto;
+	line-height: 60px;
+	text-align: center;
+	color: #4169e1;
+	font-weight: bold;
+	background-color: #B6FF01;
+	border-radius: 50%;
+	font-size: 	20px;
+	margin-bottom: 3px;
+}
+.user-contents h3{
+	font-size: 25px;
+}
+.user-post-contents{
+	padding-bottom: 30px;
+}
+.user-post{
+	height: 100%;
+	width: 90%;
+	max-width: 480px;
+	margin: 0 auto;
+	margin-top: 20px;
+	box-shadow: 1px 2px 5px #ccc;
+	padding: 5px;
+	padding-bottom: 0;
+	cursor: pointer;
+}
+
 @media screen and (min-width: 960px){
 	.user-top{
 		padding: 0;
