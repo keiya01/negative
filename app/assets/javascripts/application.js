@@ -21,7 +21,7 @@
 
 $(document).on('turbolinks:load', function() {
 	// delete modal
-	$('.post').on('click', function(){
+	$('.post-contents').on('click', function(){
 		var $id = $(this).data('id');
 		var $question = $(this).data('question');
 		$('#delete-modal').find('form').attr('action', '/posts/'+$id+'/check');

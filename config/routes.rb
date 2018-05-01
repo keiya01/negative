@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post 'comments/:id/create' => 'comments#create'
 
   get 'signup' => 'users#new'
+  get 'users/:id' => 'users#show'
   get 'auth/:provider/callback' => 'users#create'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

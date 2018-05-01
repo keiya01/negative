@@ -1,0 +1,10 @@
+.user-page
+  .user-contents
+    - if !@user.image.blank?
+      = image_tag @user.image.url, class: 'user-img'
+    - else
+      .user-noimg = @user.username[0]
+    h3 @user.username
+  .user-post-contents
+    = render partial: "user_post"
+    = paginate @posts

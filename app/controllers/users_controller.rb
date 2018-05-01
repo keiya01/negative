@@ -1,5 +1,11 @@
 class UsersController < ApplicationController
-  before_action :brock_current_user
+  before_action :brock_current_user, {only:[:new, :create]}
+  before_action :find_user, {only:[:show]}
+
+  def show
+    posts = Post.where(user_id: @user.id).order(created_at: 'DESC')
+    @posts = Kaminari.paginate_array(posts).page(params[:page]).per(15)
+  end
 
 	def new
 	end
@@ -12,6 +18,11 @@ class UsersController < ApplicationController
     else
       redirect_to '/users/new', notice: "失敗しました。"
     end
+  end
+
+  private
+  def find_user
+    @user = User.find(params[:id])
   end
 
 end

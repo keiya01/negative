@@ -35,6 +35,9 @@
 	text-align: center;
 	padding: 20% 10px;
 }
+.user-form h3{
+	display: none;
+}
 .agreement-text{
 	font-size: 15px;
 	color: #333;
@@ -59,24 +62,24 @@
 		padding: 0;
 		display: block;
 		// background: inner-gradient(to left, #B6FF01, #fff);
-		background-color: #B6FF01;
+		background-color: #4169e1;
 		position: fixed;
 		top: 0;
 		right: 45%;
 		bottom: 0;
 		left: 0;
-		padding-top: 120px;
-		padding-left: 60px;
+		padding-top: 220px;
 		overflow: hidden;
 		text-align: none;
 	}
 	.user-top h1{
 		font-size: 50px;
 		color: #fff;
+		text-align: center;
 		padding-bottom: 30px;
 	}
 	.user-top p{
-		padding-left: 80px;
+		padding-left: 85px;
 		font-size: 15px;
 		line-height: 40px;
 	}
@@ -84,27 +87,30 @@
 		height: 400px;
 		width: 400px;
 		margin-top: 0;
-		background-color: #B6FF01;
+		background-color: #4169e1;
 		padding: 0px;
-		padding-top: 80px;
+		padding-top: 75px;
 		position: absolute;
-		top: 20%;
+		top: 18%;
 		right: 3%;
 		border-radius: 50%;
 	}
 	.user-form h3{
+		display: inline-block;
 		padding: 0;
 		font-size: 50px;
 		color: #fff;
 		padding-top: 30px;
 		padding-bottom: 30px;
 	}
+	.agreement-text{
+		color: #fff;
+	}
 }
 @media screen and (min-width: 1281px){
 	.user-top{
 		display: block;
 		// background: inner-gradient(to left, #B6FF01, #fff);
-		background-color: #B6FF01;
 		position: fixed;
 		top: 0;
 		right: 45%;
@@ -115,7 +121,7 @@
 		font-size: 50px;
 	}
 	.user-top p{
-		padding-left: 150px;
+		padding-left: 120px;
 		font-size: 17px;
 	}
 	.user-form{

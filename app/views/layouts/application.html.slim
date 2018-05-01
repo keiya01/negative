@@ -23,9 +23,9 @@ html
           - else
             p.header-menu.header-mypage マイページ
           - if uri == '/posts/new' || uri == '/posts/create'
-            p.header-menu.header-new = link_to 'トップへ', '/', class: 'border-none btn-black'
+            p.header-menu.header-new = link_to 'トップへ', '/', class: 'border-none btn-white'
           -else
-            p.header-menu.header-new = link_to 'つぶやく', '/posts/new', class: 'border-none btn-black'
+            p.header-menu.header-new = link_to 'つぶやく', '/posts/new', class: 'border-none btn-white'
       - if flash[:notice]
         .flash#flash-head
           p = flash[:notice]
