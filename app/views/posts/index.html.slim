@@ -2,21 +2,5 @@
   = render partial: 'post'
   = paginate @posts
 
-- if @current_user
-  #modal
-    #delete-modal
-      h3 問題に正解すると投稿を見ることができます!
-      = form_tag "#", method: 'get' do
-        textarea name="answer" placeholder='' maxlength='150'
-        .btn-zone
-          input type="submit" value='解答する' disable_with="照合中..." class='common-delete-btn delete-btn border-none btn-white'
-          p.common-delete-btn.undelete-btn やめる
-- else
+- if !@current_user
   .foot-space
-  #modal
-    #delete-modal
-      h3 ユーザー登録・ログインをしてください。
-      p Twitterで1分で登録！
-      .btn-zone
-        p = link_to '登録', '/signup', class: 'common-sign-btn signup-btn border-none btn-white'
-        p = link_to 'ログイン', '/auth/twitter', class: 'common-sign-btn login-btn border-none btn-white'

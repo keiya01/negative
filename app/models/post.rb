@@ -5,4 +5,5 @@ class Post < ApplicationRecord
 	validates :count, presence: true
 	validates :check_count, presence: true
 	validates :user_id, presence: true
+	belongs_to :user
 end

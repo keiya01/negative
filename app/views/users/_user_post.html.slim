@@ -1,5 +1,9 @@
 - @posts.each do |post|
-  .user-post
+  - if post.check_count >= post.count
+    - active_color = 'background-color:#eeffff;'
+  - else
+    - active_color = ''
+  .user-post style="#{active_color}"
     .post-box data-id="#{post.id}" data-question="#{post.question}"
       .post-contents
         p.post-question = html_escape(post.question).gsub(/\n/, '<br>').html_safe

@@ -13,7 +13,7 @@
         .clear-right
       .post-menu
         - if !@user.image.blank?
-          = image_tag @user.image.url, class: 'post-user-img'
+          = image_tag @user.image, class: 'post-user-img'
         - else
           p.post-user-noimg = @user.username[0]
         p.post-user = link_to @user.username, "/users/#{@user.id}", class: 'border-none btn-black'

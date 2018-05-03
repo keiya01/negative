@@ -49,13 +49,17 @@ class PostsController < ApplicationController
         flash[:notice] ='正解です！！'
         session[:post_id] = @post.id
         redirect_to "/posts/#{@post.id}"
+        return
       else
         flash[:notice] = '不正解です！！'
-        redirect_to '/'
       end
     else
       flash[:notice] = '定員に達しました。'
-      redirect_to '/'
+    end
+    if params[:uri] == "/users/#{@post.user_id}"
+      redirect_to "/users/#{@post.user_id}"
+    else
+      redirect_to "/"
     end
   end
 

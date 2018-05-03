@@ -4,7 +4,7 @@
       p.post-body = html_escape(@post.body).gsub(/\n/, '<br>').html_safe
     .post-menu
       - if !@user.image.blank?
-        p.post-user-img = image_tag @user.image.url
+        p.post-user-img = image_tag @user.image
       - else
         p.post-user-noimg = @user.username[0]
       p.post-user = @user.username

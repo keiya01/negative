@@ -271,7 +271,7 @@ header h3{
 	position: fixed;
 	right: 10px;
 	top: 60px;
-	z-index: 100px;
+	z-index: 100;
 	background-color: #4169e1;
 	text-align: center;
 	box-shadow: 2px 3px 5px #ccc;
