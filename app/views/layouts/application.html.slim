@@ -11,6 +11,7 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = analytics_init if Rails.env.production?
+    meta name="google-site-verification" content="<%= ENV['GOOGLE_CONSOLE'] %>"
   body
     - uri = request.path
     - if uri != '/signup'
