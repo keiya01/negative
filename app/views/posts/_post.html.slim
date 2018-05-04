@@ -1,7 +1,8 @@
 - @posts.each do |post|
   - @user = User.find(post.user_id)
   - if post.count > post.check_count
-    - if AnswerHistory.find_by(user_id: @current_user.id, post_id: post.id) || @current_user.id == post.user_id
+    - @answerer = AnswerHistory.find_by(user_id: @current_user.id, post_id: post.id) if @current_user
+    - if @answerer || @current_user && @current_user.id == post.user_id
       .post
         = link_to "/posts/#{post.id}", class: "border-none" do
           .post-contents 
@@ -23,7 +24,7 @@
     - else
       .post
         .post-box data-id="#{post.id}" data-question="#{post.question}"
-          .post-contents
+          .post-contents 
             p.post-question = html_escape(post.question).gsub(/\n/, '<br>').html_safe
           p.post-count
            = post.check_count

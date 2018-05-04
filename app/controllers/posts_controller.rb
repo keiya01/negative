@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 	before_action :post_params, {only:[:create]}
-  before_action :brock_not_current_user, {only:[:new, :create]}
+  before_action :brock_not_current_user, {only:[:show, :new, :create]}
   before_action :find_post, {only:[:show, :destroy, :check_answer]}
   before_action :find_answerer, {only:[:show, :check_answer]}
 
@@ -13,7 +13,10 @@ class PostsController < ApplicationController
   	@user = User.find(@post.user_id)
     @answerers = AnswerHistory.where(post_id: @post.id).order(number: 'ASC')
     puts "test: #{@answerer}"
-    if !@answerer
+    if @answerer || @current_user.id == @post.user_id
+      return
+    else
+      # ログインユーザーがAnswerHistoryに載っていないか、投稿主idとログインユーザが一致しなければリダイレクト。
       flash[:notice] = "問題に答えてください。"
       redirect_to '/'
     end
@@ -47,27 +50,29 @@ class PostsController < ApplicationController
     user_answer = params[:answer]
     if @post.check_count < @post.count
       if @post.answer == user_answer
-        @post.check_count += 1
-        @post.save
-        flash[:notice] ='正解です！！'
         if @current_user && !@answerer
           @history = AnswerHistory.new(user_id: @current_user.id, post_id: @post.id, number: @post.check_count)
+          @history.save
+          @post.check_count += 1
+          @post.save
+          # 正常に処理が終わったらここで終了
+          session[:post_id] = @post.id
+          redirect_to "/posts/#{@post.id}", notice: '正解です！！'
+          return
+        elsif !@current_user
+          # ゲストは答えることが出来ないようにする。
+          redirect_to '/signup', notice: 'ログインしてください。'
+          return
         else
-          # ゲストは0で記入
-          @history = AnswerHistory.new(user_id: 0, post_id: @post.id, number: @post.check_count)
+          flash[:notice] = '解答済みです。'
         end
-        if !@history.save
-          redirect_to '/', notice: 'エラーが発生しました。'
-        end
-        session[:post_id] = @post.id
-        redirect_to "/posts/#{@post.id}"
-        return
       else
         flash[:notice] = '不正解です！！'
       end
     else
       flash[:notice] = '定員に達しました。'
     end
+    # トップから問題を解くか、マイページから問題を解くかで遷移先を分岐
     if params[:uri] == "/users/#{@post.user_id}"
       redirect_to "/users/#{@post.user_id}"
     else
@@ -85,7 +90,7 @@ class PostsController < ApplicationController
    end
 
    def find_answerer
-     @answerer = AnswerHistory.find_by(user_id: @current_user.id, post_id: @post.id)
+     @answerer = AnswerHistory.find_by(user_id: @current_user.id, post_id: @post.id) if @current_user
    end
 
    
