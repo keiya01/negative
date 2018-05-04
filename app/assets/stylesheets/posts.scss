@@ -27,12 +27,6 @@
 	min-height: 100px;
 }
 .post-contents p{
-	width: 100px;
- 	white-space: nowrap;
- 	overflow: hidden;
- 	text-overflow: ellipsis;
- 	-webkit-text-overflow: ellipsis;
- 	-o-text-overflow: ellipsis;
 	line-height: 1.7;
 	letter-spacing: 0.08em;
 	color: #333;
@@ -78,6 +72,11 @@
 	margin-bottom: 3px;
 }
 .post-user{
+ 	white-space: nowrap;
+ 	overflow: hidden;
+ 	text-overflow: ellipsis;
+ 	-webkit-text-overflow: ellipsis;
+ 	-o-text-overflow: ellipsis;
 	float: left;
 	color: #555;
 	font-size: 15px;
