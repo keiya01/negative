@@ -35,10 +35,13 @@ ja:
       post: 投稿
     attributes:
       post:
-        body: テキスト
+        body: あなたの秘密
         question: 問題
         answer: 答え
-        count: 人数
+        count: 公開人数
+      user:
+        email: そのメールアドレス
+        username: あなたの名前
   errors:
     messages:
       carrierwave_processing_error: 処理できませんでした

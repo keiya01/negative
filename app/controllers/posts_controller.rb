@@ -93,6 +93,4 @@ class PostsController < ApplicationController
      @answerer = AnswerHistory.find_by(user_id: @current_user.id, post_id: @post.id) if @current_user
    end
 
-   
-
 end

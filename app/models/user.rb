@@ -1,10 +1,9 @@
 class User < ApplicationRecord
   # mount_uploader :image, ImageUploader
-  validates :provider, presence: true
-  validates :uid, presence: true
-  validates :username, presence: true
+  validates :provider, :uid, presence: true
+  validate :add_presence_errors
+  validates :email, uniqueness: {message: "は他の人が先に登録しているみたい..."}, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: "は正しくないよ！" }, on: :update
   has_many :posts, dependent: :destroy
-  validates :email, presence: true, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, on: :update
 
   def self.find_or_create_from_auth_hash(auth_hash)
    provider = auth_hash[:provider]
@@ -16,6 +15,14 @@ class User < ApplicationRecord
      user.username = name
      user.image = image_url
    end
+  end
+
+  def add_presence_errors
+    if username.empty?
+      errors.add(:username, "を知りたい！")
+    elsif email.empty?
+      errors[:base] << "メールアドレスを教えてほしいな..."
+    end
   end
 
 end

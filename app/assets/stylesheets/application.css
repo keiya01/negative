@@ -75,7 +75,7 @@ textarea{
 	background-color: #fff;
 	width: 90%;
 	max-width: 480px;
-	margin-top: 150px;
+	margin-top: 100px;
 	border-radius: 20px;
 	padding-bottom: 30px;
 }
@@ -188,10 +188,16 @@ textarea{
 	margin: 0 auto;
 	margin-bottom: 100px;
 }
+.form-area label{
+	padding-left: 15px;
+	font-size: 15px;
+	font-weight: bold;
+	color: #aaa;
+}
 .form-area textarea{
 	width: 100%;
+	margin-bottom: 8px;
 	padding: 15px;
-	margin-top: 5px;
 	border-radius: 20px;
 	border: 1.5px solid #4169e1;
 }
