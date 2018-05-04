@@ -1,21 +1,41 @@
 - @posts.each do |post|
   - @user = User.find(post.user_id)
   - if post.count > post.check_count
-    .post
-      .post-box data-id="#{post.id}" data-question="#{post.question}"
-        .post-contents 
-          p.post-question = html_escape(post.question).gsub(/\n/, '<br>').html_safe
-        p.post-count
-         = post.check_count
-         | /
-         = post.count
-         | 人が正解
-        .clear-right
-      .post-menu
-        - if !@user.image.blank?
-          = image_tag @user.image, class: 'post-user-img'
-        - else
-          p.post-user-noimg = @user.username[0]
-        p.post-user = link_to @user.username, "/users/#{@user.id}", class: 'border-none btn-black'
-        p.post-time = simple_time(post.created_at)
-        .clear-right.clear-left
+    - if AnswerHistory.find_by(user_id: @current_user.id, post_id: post.id) || @current_user.id == post.user_id
+      .post
+        = link_to "/posts/#{post.id}", class: "border-none" do
+          .post-contents 
+            p.post-question = html_escape(post.question).gsub(/\n/, '<br>').html_safe
+          p.post-count
+           = post.check_count
+           | /
+           = post.count
+           | 人が正解
+          .clear-right
+        .post-menu
+          - if !@user.image.blank?
+            = image_tag @user.image, class: 'post-user-img'
+          - else
+            p.post-user-noimg = @user.username[0]
+          p.post-user = link_to @user.username, "/users/#{@user.id}", class: 'border-none btn-black'
+          p.post-time = simple_time(post.created_at)
+          .clear-right.clear-left
+    - else
+      .post
+        .post-box data-id="#{post.id}" data-question="#{post.question}"
+          .post-contents
+            p.post-question = html_escape(post.question).gsub(/\n/, '<br>').html_safe
+          p.post-count
+           = post.check_count
+           | /
+           = post.count
+           | 人が正解
+          .clear-right
+        .post-menu
+          - if !@user.image.blank?
+            = image_tag @user.image, class: 'post-user-img'
+          - else
+            p.post-user-noimg = @user.username[0]
+          p.post-user = link_to @user.username, "/users/#{@user.id}", class: 'border-none btn-black'
+          p.post-time = simple_time(post.created_at)
+          .clear-right.clear-left

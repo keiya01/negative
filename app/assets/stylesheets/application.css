@@ -138,7 +138,7 @@ textarea{
 }
 @media screen and (min-width: 480px){
 	// form
-	.post-form input[type="submit"]{
+	.form-area input[type="submit"]{
 		width: 40%;
 		margin: 0;
 		float: right;
@@ -180,6 +180,55 @@ textarea{
 	width: 100%;
 	height: 100%;
 	padding-top: 80px;
+}
+.form-area{
+	height: 100%;
+	width: 90%;
+	max-width: 480px;
+	margin: 0 auto;
+	margin-bottom: 100px;
+}
+.form-area textarea{
+	width: 100%;
+	padding: 15px;
+	margin-top: 5px;
+	border-radius: 20px;
+	border: 1.5px solid #4169e1;
+}
+.form-area textarea:focus{
+	outline: none;
+	border: 1.5px solid #B6FF01;
+}
+.form-area input[type="text"]{
+	width: 100%;
+	padding: 5px;
+	margin-top: 5px;
+	border-radius: 5px;
+	border: 1.5px solid #4169e1;
+}
+.form-area input[type="text"]:focus{
+	outline: none;
+	border: 1.5px solid #B6FF01;
+}
+.form-area input[type="submit"]{
+	display: block;
+	width: 100%;
+	margin: 0 auto;
+	margin-top: 50px;
+	border: 1px solid #4169e1;
+}
+.form-area input[type="submit"]:focus{
+	border: 1px solid #B6FF01;
+}
+.form-area select{
+	border: 1px solid #4169e1;
+	padding: 5px;
+	font-size:14px;
+	margin-top:5px;
+}
+.form-area select:focus{
+	outline: none;
+	border: 1px solid #B6FF01;
 }
 
 /*error*/

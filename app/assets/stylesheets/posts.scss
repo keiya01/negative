@@ -27,6 +27,12 @@
 	min-height: 100px;
 }
 .post-contents p{
+	width: 100px;
+ 	white-space: nowrap;
+ 	overflow: hidden;
+ 	text-overflow: ellipsis;
+ 	-webkit-text-overflow: ellipsis;
+ 	-o-text-overflow: ellipsis;
 	line-height: 1.7;
 	letter-spacing: 0.08em;
 	color: #333;
@@ -75,6 +81,7 @@
 	float: left;
 	color: #555;
 	font-size: 15px;
+	font-weight: bold;
 	padding-top: 10px;
 	padding-left: 5px;
 }
@@ -84,46 +91,6 @@
 	bottom: 0;
 	color: #aaa;
 	font-size: 13px;
-}
-
-// post form
-.post-form{
-	height: 100%;
-	width: 90%;
-	max-width: 480px;
-	margin: 0 auto;
-	margin-bottom: 100px;
-}
-.post-form textarea{
-	width: 100%;
-	padding: 15px;
-	margin-top: 5px;
-	border-radius: 20px;
-	border: 1.5px solid #4169e1;
-}
-.post-form textarea:focus{
-	outline: none;
-	border: 1.5px solid #B6FF01;
-}
-.post-form input[type="submit"]{
-	display: block;
-	width: 100%;
-	margin: 0 auto;
-	margin-top: 50px;
-	border: 1px solid #4169e1;
-}
-.post-form input[type="submit"]:focus{
-	border: 1px solid #B6FF01;
-}
-.post-form select{
-	border: 1px solid #4169e1;
-	padding: 5px;
-	font-size:14px;
-	margin-top:5px;
-}
-.post-form select:focus{
-	outline: none;
-	border: 1px solid #B6FF01;
 }
 
 // show
@@ -139,6 +106,82 @@
 }
 .post-body{
 	font-size: 15px;
+}
+.answerer-list{
+	width: 90%;
+	max-width: 480px;
+	height: 100%;
+	margin: 0 auto;
+	margin-top: 50px;
+	text-align: center;
+	border: 2px solid #ccc;
+}
+.answerer-list h5{
+	font-size: 20px;
+	color: #4169e1;
+	padding: 15px 0;
+}
+.answerer{
+	border-top: 2px solid #ccc;
+}
+.answerer-user{
+	display: inline-block;
+	padding: 10px 0;
+}
+.answerer-img{
+	float: left;
+	width: 60px;
+	height: 60px;
+	object-fit: cover;
+	border-radius: 50%;
+	margin-bottom: 3px;
+}
+.answerer-name{
+ 	white-space: nowrap;
+ 	text-overflow: ellipsis;
+ 	-webkit-text-overflow: ellipsis;
+ 	-o-text-overflow: ellipsis;
+	float: left;
+	color: #333;
+	font-size: 20px;
+	font-weight: bold;
+	padding-top: 20px;
+	padding-left: 5px;
+
+}
+.answerer-guest{
+	white-space: nowrap;
+ 	text-overflow: ellipsis;
+ 	-webkit-text-overflow: ellipsis;
+ 	-o-text-overflow: ellipsis;
+	float: left;
+	color: blue;
+	font-size: 17px;
+	font-weight: bold;
+	padding: 10px 0;
+}
+.answerer-menu{
+	position: relative;
+	border-top: 1px solid #ccc;
+	padding: 5px;
+	width: 100%;
+	height: 100%;
+}
+.answerer-rank{
+	float: left;
+	background-color: #4169e1;
+	border-radius: 5px;
+	padding: 5px 25px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #fff;
+}
+.answerer-time{
+	position: absolute;
+	right: 5px;
+	bottom: 0;
+	color: #aaa;
+	font-size: 13px;
 }
 
 @media screen and (min-width: 480px){

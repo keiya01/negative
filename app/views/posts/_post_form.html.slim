@@ -3,8 +3,8 @@
     - @post.errors.full_messages.each do |message|
       p = message
   = form_for @post, url: posts_create_path do |f|
-    .post-form
-  	  = f.text_area :body, placeholder: '今日の出来事は？(500文字まで)', maxlength: 500, rows: 15
+    .form-area
+  	  = f.text_area :body, placeholder: 'あなたの秘密・思い・暴露したいことは何ですか？(500文字まで)※ここの部分は問題に正解した人しか見ることが出来ません。', maxlength: 500, rows: 15
   	  = f.hidden_field :user_id, value: @current_user.id
   	  = f.text_area :question, placeholder: '友達だけが知っていることは？(150文字まで) 例：ABC君の誕生日は？', maxlength: 150, rows: 8
   	  = f.text_area :answer, placeholder: '問題の答えは？(30文字まで)', maxlength: 30, rows: 3

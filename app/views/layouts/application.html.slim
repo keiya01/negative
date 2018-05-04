@@ -16,15 +16,15 @@ html
       header
         h3 = image_tag 'locqer_logo.png'
         - if @current_user
-          - if uri != '/'
-            = link_to '/', class: 'border-none btn-black'
+          - if @user && uri != '/' && uri == "/users/#{@user.id}/edit"
+            = link_to :back, class: 'border-none btn-black' do
               p.back-btn
                 i.fa.fa-angle-left
+          - elsif uri != '/'
+             p.header-menu.header-mypage = link_to "トップへ", "/", class: 'border-none btn-white'
           - else
             p.header-menu.header-mypage = link_to "マイページ", "/users/#{@current_user.id}", class: 'border-none btn-white'
-          - if uri == '/posts/new' || uri == '/posts/create'
-            p.header-menu.header-new = link_to 'トップへ', '/', class: 'border-none btn-white'
-          -else
+          - if uri != '/posts/new'
             p.header-menu.header-new = link_to 'つぶやく', '/posts/new', class: 'border-none btn-white'
       - if flash[:notice]
         .flash#flash-head
@@ -35,23 +35,13 @@ html
           p.footer-signup = link_to 'サインアップ', '/signup', class: 'border-none btn-white'
           p.footer-login = link_to 'ログイン', "/auth/twitter", class: 'border-none btn-white'
 
-    - if @current_user
-      #modal
-        #delete-modal
-          h3 問題に正解すると投稿を見ることができます!
-          = form_tag "#", method: 'get' do
-            textarea name="answer" placeholder='' maxlength='150'
-            .btn-zone
-              input type="hidden" name="uri" value="#{uri}"
-              input type="submit" value='解答する' disable_with="照合中..." class='common-delete-btn delete-btn border-none btn-white'
-
-              p.common-delete-btn.undelete-btn やめる
-    - else
-        #modal
-          #delete-modal
-            h3 ユーザー登録・ログインをしてください。
-            p Twitterで1分で登録！
-            .btn-zone
-              p = link_to '登録', '/signup', class: 'common-sign-btn signup-btn border-none btn-white'
-              p = link_to 'ログイン', '/auth/twitter', class: 'common-sign-btn login-btn border-none btn-white'
+  #modal
+    #delete-modal
+      h3 問題に正解すると投稿を見ることができます!
+      = form_tag "#", method: 'get' do
+        textarea name="answer" placeholder='' maxlength='150'
+        .btn-zone
+          input type="hidden" name="uri" value="#{uri}"
+          input type="submit" value='解答する' disable_with="照合中..." class='common-delete-btn delete-btn border-none btn-white'
+          p.common-delete-btn.undelete-btn やめる
   = yield

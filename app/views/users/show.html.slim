@@ -5,7 +5,7 @@
     - else
       .user-noimg = @user.username[0]
     h3 = @user.username
-    p = link_to "設定", "#", class: 'border-none'
+    p = link_to "設定", "/users/#{@user.id}/edit", class: 'border-none'
   .user-post-contents
     = render partial: "user_post"
     = paginate @posts
