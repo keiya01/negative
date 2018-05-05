@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :brock_current_user, {only:[:new, :create]}
-  before_action :brock_not_current_user, {only:[:edit, :update]}
+  before_action :brock_not_current_user, {only:[:edit, :update, :logout]}
   before_action :find_user, {only:[:show, :edit, :update, :brock_user]}
   before_action :brock_user, {only:[:edit, :update]}
 
@@ -20,7 +20,12 @@ class UsersController < ApplicationController
       redirect_to "/users/#{user.id}/edit", notice: "Emailを登録してください"
     elsif !user.email.blank?
       session[:user_id] = user.id
-      redirect_to "/users/#{user.id}", notice: "ログインしました！"
+      flash[:notice] = "ログインしました！"
+      if session[:post_id]
+        redirect_to "/posts/#{session[:post_id]}/check"
+      else
+        redirect_to "/users/#{user.id}"
+      end
     else
       redirect_to "/", notice: "エラーが発生しました。"
     end
@@ -41,6 +46,17 @@ class UsersController < ApplicationController
         render 'users/edit'
       end
     end
+  end
+
+  def logout
+    @user = User.find(session[:user_id])
+    if @user
+      session[:user_id] = nil
+      redirect_to '/', notice: 'またきてね！'
+    else
+      redirect_to '/', notice: '権限がありません。'
+    end
+
   end
 
   def brock_user

@@ -49,19 +49,20 @@ class PostsController < ApplicationController
   def check_answer
     user_answer = params[:answer]
     if @post.check_count < @post.count
-      if @post.answer == user_answer
+      if @post.answer == user_answer || @current_user && session[:post_id]
         if @current_user && !@answerer
+          # ログインユーザーがAnswerHistoryに載っていないか、session[:post_id]に値があるならリダイレクト。
           @history = AnswerHistory.new(user_id: @current_user.id, post_id: @post.id, number: @post.check_count)
           @history.save
           @post.check_count += 1
           @post.save
           # 正常に処理が終わったらここで終了
-          session[:post_id] = @post.id
           redirect_to "/posts/#{@post.id}", notice: '正解です！！'
           return
         elsif !@current_user
-          # ゲストは答えることが出来ないようにする。
-          redirect_to '/signup', notice: 'ログインしてください。'
+          # 正解したらサインアップフォームへ行き、登録後に正解ページへリダイレクトする。
+          session[:post_id] = @post.id
+          redirect_to '/signup', notice: '正解です！ログインしてください！'
           return
         else
           flash[:notice] = '解答済みです。'

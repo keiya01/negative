@@ -34,7 +34,9 @@ html
              p = link_to "トップへ", "/", class: 'border-none btn-white header-menu header-mypage'
           - else
             p = link_to "マイページ", "/users/#{@current_user.id}", class: 'border-none btn-white header-menu header-mypage'
-          - if uri != '/posts/new'
+          - if uri == "/users/#{@current_user.id}"
+            p.header-menu.header-new = link_to 'ログアウト', '/logout', class: 'border-none btn-white', method: 'post'
+          - elsif uri != '/posts/new'
             p.header-menu.header-new = link_to 'つぶやく', '/posts/new', class: 'border-none btn-white'
     - if flash[:notice]
       .flash#flash-head
