@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180506083057) do
+ActiveRecord::Schema.define(version: 20180506102714) do
 
   create_table "answer_histories", force: :cascade do |t|
     t.integer "post_id"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20180506083057) do
     t.integer "check_count"
     t.string "question"
     t.string "answer"
+    t.string "random_key"
   end
 
   create_table "users", force: :cascade do |t|

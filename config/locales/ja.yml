@@ -39,6 +39,7 @@ ja:
         question: 問題
         answer: 答え
         count: 公開人数
+        random_key: もう一度
       user:
         email: そのメールアドレス
         username: あなたの名前

@@ -15,5 +15,6 @@
       br
   	  = f.select :count, [[3, '3人'],[5, '5人'],[8, '8人'],[10, '10人']], prompt: '公開人数を選択して下さい'
       = f.hidden_field :check_count, value: 0
+      = f.hidden_field :random_key, value: "#{@random}"
   	  br
   	  = f.submit value: 'つぶやく', data: { disable_with: "作成中..." }, class: 'button-simple'

@@ -5,14 +5,14 @@ class PostsController < ApplicationController
   before_action :find_answerer, {only:[:show, :check_answer]}
 
   def index
-  	@posts = Post.page(params[:page]).per(15).order(created_at: "DESC")
-    @comment = Comment.new
+  	# @posts = Post.page(params[:page]).per(15).order(created_at: "DESC")
+   #  @comment = Comment.new
+   redirect_to '/'
   end
 
   def show
   	@user = User.find(@post.user_id)
     @answerers = AnswerHistory.where(post_id: @post.id).order(number: 'ASC')
-    puts "test: #{@answerer}"
     if @answerer || @current_user.id == @post.user_id
       return
     else
@@ -23,6 +23,7 @@ class PostsController < ApplicationController
   end
 
   def new
+    @random = SecureRandom.hex(10)
   	@post = Post.new
   end
 
@@ -58,7 +59,7 @@ class PostsController < ApplicationController
           @history = AnswerHistory.new(user_id: @current_user.id, post_id: @post.id, number: @post.check_count)
           @history.save
           # 正常に処理が終わったらここで終了
-          redirect_to "/posts/#{@post.id}", notice: '正解です！！'
+          redirect_to "/posts/#{@post.random_key}", notice: '正解です！！'
           return
         elsif !@current_user
           # 正解したらサインアップフォームへ行き、登録後に正解ページへリダイレクトする。
@@ -85,11 +86,11 @@ class PostsController < ApplicationController
 
   private
    def post_params
-   	 params.require('post').permit(:body, :user_id, :question, :answer, :count, :check_count)
+   	 params.require('post').permit(:body, :user_id, :question, :answer, :count, :check_count, :random_key)
    end
 
    def find_post
-     @post = Post.find(params[:id])
+     @post = Post.find(params[:random_key])
    end
 
    def find_answerer

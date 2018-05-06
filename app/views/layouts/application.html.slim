@@ -22,7 +22,7 @@ html
     meta name="google-site-verification" content="wf107urn950KqpvKe745_G-kWMmU8f00QQ7_Q4Qf_J8"
   body
     - uri = request.path
-    - if uri != '/signup'
+    - if uri != '/'
       header
         h3 = image_tag 'locqer_logo.png'
         - if @current_user
@@ -30,18 +30,14 @@ html
             = link_to :back, class: 'border-none btn-black' do
               p.back-btn
                 i.fa.fa-angle-left
-          - elsif uri != '/'
-             p = link_to "トップへ", "/", class: 'border-none btn-white header-menu header-mypage'
-          - else
-            p = link_to "マイページ", "/users/#{@current_user.id}", class: 'border-none btn-white header-menu header-mypage'
           - if uri == "/users/#{@current_user.id}"
-            p.header-menu.header-new = link_to 'ログアウト', '/logout', class: 'border-none btn-white', method: 'post'
-          - elsif uri != '/posts/new'
+            p = link_to 'ログアウト', '/logout', class: 'border-none btn-white header-menu header-mypage', method: 'post'
+          - if uri != '/posts/new'
             p.header-menu.header-new = link_to 'つぶやく', '/posts/new', class: 'border-none btn-white'
     - if flash[:notice]
       .flash#flash-head
         p = flash[:notice]
-    - if !@current_user && uri != '/signup'
+    - if !@current_user && uri != '/'
       footer
         .footer-btn
           p.footer-signup = link_to 'サインアップ', '/signup', class: 'border-none btn-white'
