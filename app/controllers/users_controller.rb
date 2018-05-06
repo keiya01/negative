@@ -17,14 +17,14 @@ class UsersController < ApplicationController
     if user.email.blank?
       session[:user_id] = user.id
       session[:new_user] = user.id
-      redirect_to "/users/#{user.id}/edit", notice: "Emailを登録してください"
+      redirect_to "/users/#{user.nickname}/edit", notice: "Emailを登録してください"
     elsif !user.email.blank?
       session[:user_id] = user.id
       flash[:notice] = "ログインしました！"
       if session[:post_id]
         redirect_to "/posts/#{session[:post_id]}/check"
       else
-        redirect_to "/users/#{user.id}"
+        redirect_to "/users/#{user.nickname}"
       end
     else
       redirect_to "/", notice: "エラーが発生しました。"
@@ -39,9 +39,9 @@ class UsersController < ApplicationController
       @user.username = params[:user][:username]
       @user.email = params[:user][:email]
       if @user.save && session[:new_user]
-        redirect_to "/users/#{@user.id}", notice: "登録が完了しました！"
+        redirect_to "/users/#{@user.nickname}", notice: "登録が完了しました！"
       elsif @user.save
-        redirect_to "/users/#{@user.id}", notice: "更新しました！"
+        redirect_to "/users/#{@user.nickname}", notice: "更新しました！"
       else
         render 'users/edit'
       end
@@ -68,7 +68,7 @@ class UsersController < ApplicationController
 
   private
   def find_user
-    @user = User.find(params[:id])
+    @user = User.find_by(nickname: params[:nickname])
   end
 
 end

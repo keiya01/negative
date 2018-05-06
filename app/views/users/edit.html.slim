@@ -3,7 +3,7 @@
     .error
       - @user.errors.full_messages.each do |message|
         p = message
-    = form_for @user, url: "/users/#{@user.id}/update" do |f|
+    = form_for @user, url: "/users/#{@user.nickname}/update" do |f|
       .form-area
         = f.text_field :username, placeholder: '名前を入力！', value: "#{@user.username}"
         = f.text_field :email, placeholder: 'メールアドレスを入力！', value: "#{@user.email}"

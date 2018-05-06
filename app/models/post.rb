@@ -4,6 +4,7 @@ class Post < ApplicationRecord
 	validates :answer, length:{maximum: 30}
 	validates :check_count, :user_id, presence: true
 	validate :add_presence_errors
+	has_many :answer_histories, dependent: :destroy
 	belongs_to :user
 
 	def add_presence_errors

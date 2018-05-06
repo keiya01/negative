@@ -8,10 +8,10 @@ Rails.application.routes.draw do
 
   post 'comments/:id/create' => 'comments#create'
 
-  get 'users/:id/edit' => 'users#edit'
-  patch 'users/:id/update' => 'users#update'
+  get 'users/:nickname/edit' => 'users#edit'
+  patch 'users/:nickname/update' => 'users#update'
   get 'signup' => 'users#new'
-  get 'users/:id' => 'users#show'
+  get 'users/:nickname' => 'users#show'
   get 'auth/:provider/callback' => 'users#create'
   post 'logout' => 'users#logout'
 

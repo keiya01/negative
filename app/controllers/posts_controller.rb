@@ -50,12 +50,13 @@ class PostsController < ApplicationController
     user_answer = params[:answer]
     if @post.check_count < @post.count
       if @post.answer == user_answer || @current_user && session[:post_id]
-        if @current_user && !@answerer
-          # ログインユーザーがAnswerHistoryに載っていないか、session[:post_id]に値があるならリダイレクト。
-          @history = AnswerHistory.new(user_id: @current_user.id, post_id: @post.id, number: @post.check_count)
-          @history.save
+        # 答えがあっているか、ログインユーザーのセッションidを持っていればパス
           @post.check_count += 1
           @post.save
+        if @current_user && !@answerer
+          # ログインユーザーがAnswerHistoryに載っていないかつログインユーザーならパス。
+          @history = AnswerHistory.new(user_id: @current_user.id, post_id: @post.id, number: @post.check_count)
+          @history.save
           # 正常に処理が終わったらここで終了
           redirect_to "/posts/#{@post.id}", notice: '正解です！！'
           return
@@ -73,9 +74,10 @@ class PostsController < ApplicationController
     else
       flash[:notice] = '定員に達しました。'
     end
-    # トップから問題を解くか、マイページから問題を解くかで遷移先を分岐
+    # 不正解のとき、トップから問題を解くか、マイページから問題を解くかで遷移先を分岐
     if params[:uri] == "/users/#{@post.user_id}"
-      redirect_to "/users/#{@post.user_id}"
+      user = User.find(@post.user_id)
+      redirect_to "/users/#{user.nickname}"
     else
       redirect_to "/"
     end

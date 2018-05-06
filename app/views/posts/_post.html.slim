@@ -19,7 +19,7 @@
               = image_tag @user.image, class: 'post-user-img'
             - else
               p.post-user-noimg = @user.username[0]
-            p.post-user = link_to @user.username, "/users/#{@user.id}", class: 'border-none btn-black'
+            p.post-user = link_to @user.username, "/users/#{@user.nickname}", class: 'border-none btn-black'
           .clear-left
           p.post-time = simple_time(post.created_at)
           .clear-right
@@ -40,7 +40,7 @@
               = image_tag @user.image, class: 'post-user-img'
             - else
               p.post-user-noimg = @user.username[0]
-            p.post-user = link_to @user.username, "/users/#{@user.id}", class: 'border-none btn-black'
+            p.post-user = link_to @user.username, "/users/#{@user.nickname}", class: 'border-none btn-black'
           .clear-left
           p.post-time = simple_time(post.created_at)
           .clear-right
