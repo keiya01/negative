@@ -22,7 +22,8 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       flash[:notice] = "ログインしました！"
       if session[:post_id]
-        redirect_to "/posts/#{session[:post_id]}/check"
+        @post = Post.find(session[:post_id])
+        redirect_to "/posts/#{@post.random_key}/check"
       else
         redirect_to "/users/#{user.nickname}"
       end

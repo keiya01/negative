@@ -10,7 +10,7 @@
 	background-color: #4169e1;
 	overflow: hidden;
 	text-align: center;
-	padding: 100px 10px;
+	padding: 30% 10px;
 }
 .user-top h1{
 	font-size: 30px;
@@ -39,9 +39,8 @@
 	display: none;
 }
 .agreement-text{
-	font-size: 15px;
-	color: #333;
-	padding-bottom: 30px;
+	font-size: 12px;
+	padding-top: 10px;
 }
 .agreement-btn{
 	color: tomato;
@@ -52,6 +51,7 @@
 	width: 80%;
 	padding: 8px 0;
 	color: #fff;
+	font-size: 0.95em;
 	border-radius: 20px;
 }
 .twitter-btn i{
@@ -95,6 +95,12 @@
 	font-size: 15px;
 	border-bottom: 2px solid #ccc;
 	padding-bottom: 30px;
+}
+.question-notice{
+	text-align: center;
+	font-size: 17px;
+	font-weight: bold;
+	color: #aaa;
 }
 .user-post-contents{
 	padding-bottom: 30px;

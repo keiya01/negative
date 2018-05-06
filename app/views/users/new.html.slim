@@ -3,18 +3,20 @@
     h1 LOCQER
     .top-text
       p
-       | ●友達しか知らない問題を出してみよう！
+       | ●大切な人しか知らない問題を出してみよう！
        br
-       | ●正解した人にあなたの秘密を伝えてみよう！
+       | ●正解した人にあなたの秘密・思いを伝えてみよう！
        br
        | ●あなたをよく知っている人は意外な人かも！
+       br
+       | ●大切な人だけに思いを伝えてみよう！
   .user-form
-    h3 SignIn
-    p.agreement-text
-      | 登録することで
-      = link_to '利用規約', '/', class: 'agreement-btn border-none'
-      | に同意したものとします。
+    h3 SignUp
     = link_to '/auth/twitter', class: 'border-none' do
       p.twitter-btn
         i.fa.fa-twitter
-        | 30秒でTwitter登録をする
+        | Twitterで登録して思いを伝える
+    p.agreement-text
+      | ※登録することで
+      = link_to '利用規約', '/', class: 'agreement-btn border-none'
+      | に同意したものとします。

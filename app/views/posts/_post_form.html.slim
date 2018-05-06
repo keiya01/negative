@@ -4,8 +4,8 @@
       p = message
   = form_for @post, url: posts_create_path do |f|
     .form-area
-      = f.label :body, "秘密(500文字まで)"
-  	  = f.text_area :body, placeholder: 'あなたの秘密は何ですか？(例：実は○○さんのことが好きです。)※ここの部分は問題に正解した人しか見ることが出来ません。', maxlength: 500, rows: 15
+      = f.label :body, "秘密・思い(500文字まで)"
+  	  = f.text_area :body, placeholder: 'あなたの秘密・思いは何ですか？(例：実は○○さんのことが好きです。)※ここの部分は問題に正解した人しか見ることが出来ません。', maxlength: 500, rows: 15
   	  = f.hidden_field :user_id, value: @current_user.id
       = f.label :question, "問題(150文字まで)"
   	  = f.text_area :question, placeholder: '友達だけが知っていることは？（例：ABC君の誕生日は？）', maxlength: 150, rows: 8

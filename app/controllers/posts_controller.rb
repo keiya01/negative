@@ -49,13 +49,14 @@ class PostsController < ApplicationController
 
   def check_answer
     user_answer = params[:answer]
+    user = User.find(@post.user_id)
     if @post.check_count < @post.count
       if @post.answer == user_answer || @current_user && session[:post_id]
         # 答えがあっているか、ログインユーザーのセッションidを持っていればパス
-          @post.check_count += 1
-          @post.save
         if @current_user && !@answerer
           # ログインユーザーがAnswerHistoryに載っていないかつログインユーザーならパス。
+          @post.check_count += 1
+          @post.save
           @history = AnswerHistory.new(user_id: @current_user.id, post_id: @post.id, number: @post.check_count)
           @history.save
           # 正常に処理が終わったらここで終了
@@ -64,7 +65,7 @@ class PostsController < ApplicationController
         elsif !@current_user
           # 正解したらサインアップフォームへ行き、登録後に正解ページへリダイレクトする。
           session[:post_id] = @post.id
-          redirect_to '/signup', notice: '正解です！ログインしてください！'
+          redirect_to '/', notice: '正解です！ログインしてください！'
           return
         else
           flash[:notice] = '解答済みです。'
@@ -76,8 +77,7 @@ class PostsController < ApplicationController
       flash[:notice] = '定員に達しました。'
     end
     # 不正解のとき、トップから問題を解くか、マイページから問題を解くかで遷移先を分岐
-    if params[:uri] == "/users/#{@post.user_id}"
-      user = User.find(@post.user_id)
+    if params[:uri] == "/users/#{user.nickname}"
       redirect_to "/users/#{user.nickname}"
     else
       redirect_to "/"
@@ -90,7 +90,7 @@ class PostsController < ApplicationController
    end
 
    def find_post
-     @post = Post.find(params[:random_key])
+     @post = Post.find_by(random_key: params[:random_key])
    end
 
    def find_answerer

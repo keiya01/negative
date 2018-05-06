@@ -6,7 +6,7 @@
   - @answerer = AnswerHistory.find_by(user_id: @current_user.id, post_id: post.id) if @current_user
   - if @answerer || @current_user && @current_user.id == post.user_id
     .user-post style="#{active_color}"
-      = link_to "/posts/#{post.id}", class: 'border-none' do
+      = link_to "/posts/#{post.random_key}", class: 'border-none' do
         .post-contents
           p.post-question = html_escape(post.question).gsub(/\n/, '<br>').html_safe
         p.post-count
@@ -25,7 +25,7 @@
         .clear-right.clear-left
   - else
     .user-post style="#{active_color}"
-      .post-box data-id="#{post.id}" data-question="#{post.question}"
+      .post-box data-id="#{post.random_key}" data-question="#{post.question}"
         .post-contents
            p.post-question = html_escape(post.question).gsub(/\n/, '<br>').html_safe
         p.post-count
