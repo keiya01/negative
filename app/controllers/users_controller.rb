@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :brock_current_user, {only:[:new, :create]}
   before_action :brock_not_current_user, {only:[:edit, :update, :logout]}
   before_action :find_user, {only:[:show, :edit, :update, :brock_user]}
-  before_action :brock_user, {only:[:edit, :update]}
+  before_action :brock_user, {only:[:edit, :update, :logout]}
 
   def show
     posts = Post.where(user_id: @user.id).order(created_at: 'DESC')

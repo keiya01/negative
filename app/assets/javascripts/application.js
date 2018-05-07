@@ -15,6 +15,7 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery.infinitescroll
+//= require social-share-button
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .

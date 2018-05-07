@@ -5,10 +5,14 @@
     - else
       .user-noimg = @user.username[0]
     h3 = @user.username
+    .tweet-btn
+      = social_share_button_tag("LOCQERで大切な人に思いを伝えてみよう！一緒にやってみよう！")
+      p URLをツイートして友達に思いを伝えよう！
     - if @current_user && @current_user.id == @user.id
-      p = link_to "設定", "/users/#{@user.nickname}/edit", class: 'border-none'
+      p.setting-btn = link_to "設定", "/users/#{@user.nickname}/edit", class: 'border-none'
   .user-post-contents
-    p.question-notice 問題に答えてみよう！
+    - if !@posts.blank?
+      p.question-notice 問題に答えてみよう！
     = render partial: "user_post"
     = paginate @posts
 - if !@current_user

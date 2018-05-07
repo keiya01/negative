@@ -2,7 +2,7 @@ doctype html
 html
   head
     meta charset="UTF-8"
-    meta name="description" content="ネガティブな感情を打ち明けて、多くの人に励ましてもらうサービスです。"
+    meta name="description" content="大切な人だけに思いを伝えるSNS"
     meta http-equiv="X-UA-Compatible" content="IE=edge"
     meta name="viewport" content="width=device-width,initial-scale=1"
     - twitter_card = get_twitter_card_info(@user ? @user : nil)
@@ -30,7 +30,7 @@ html
             = link_to :back, class: 'border-none btn-black' do
               p.back-btn
                 i.fa.fa-angle-left
-          - if uri == "/users/#{@current_user.id}"
+          - if uri == "/users/#{@current_user.nickname}"
             p = link_to 'ログアウト', '/logout', class: 'border-none btn-white header-menu header-mypage', method: 'post'
           - if uri != '/posts/new'
             p.header-menu.header-new = link_to 'つぶやく', '/posts/new', class: 'border-none btn-white'

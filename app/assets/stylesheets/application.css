@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  *= require font-awesome
+ *= require social-share-button
  */
 
 /*初期化処理*/
@@ -56,6 +57,28 @@ textarea{
 	color: #fff;
 	font-size: 15px;
 	font-weight: bold;
+}
+
+/*twitter*/
+.tweet-btn{
+	display: inline-block;
+	position: relative;
+}
+.social-share-button{
+	margin: 0 auto;
+	border-radius: 5px;
+	position: relative;
+}
+.social-share-button a{
+	background-size: 20px 100px !important;
+	background-color: #00aced !important;
+	width: 150px !important;
+	height: 30px !important;
+	border-radius: 30px;
+}
+.tweet-btn p{
+	font-size: 13px;
+	color: #888;
 }
 
 /*modal*/

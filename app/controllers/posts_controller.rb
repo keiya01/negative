@@ -30,8 +30,9 @@ class PostsController < ApplicationController
   def create
   	@post = Post.new(post_params)
   	if @post.save
+      @user = User.find(@post.user_id)
   		flash[:notice] = '投稿しました。'
-  		redirect_to '/'
+  		redirect_to "/users/#{@user.nickname}"
   	else
   		render 'posts/new'
   	end
