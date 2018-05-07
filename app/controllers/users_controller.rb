@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :brock_current_user, {only:[:new, :create]}
   before_action :brock_not_current_user, {only:[:edit, :update, :logout]}
   before_action :find_user, {only:[:show, :edit, :update, :brock_user]}
-  before_action :brock_user, {only:[:edit, :update, :logout]}
+  before_action :brock_user, {only:[:edit, :update]}
 
   def show
     posts = Post.where(user_id: @user.id).order(created_at: 'DESC')
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
         redirect_to "/users/#{user.nickname}"
       end
     else
-      redirect_to "/", notice: "エラーが発生しました。"
+      redirect_to "/users/#{user.nickname}", notice: "エラーが発生しました。"
     end
   end
 
@@ -39,8 +39,9 @@ class UsersController < ApplicationController
     if @user
       @user.username = params[:user][:username]
       @user.email = params[:user][:email]
-      if @user.save && session[:new_user]
-        redirect_to "/users/#{@user.nickname}", notice: "登録が完了しました！"
+      if @user.save && session[:post_id]
+        post = Post.find(session[:post_id])
+        redirect_to "/posts/#{post.random_key}/check", notice: "正解です！"
       elsif @user.save
         redirect_to "/users/#{@user.nickname}", notice: "更新しました！"
       else
@@ -55,14 +56,14 @@ class UsersController < ApplicationController
       session[:user_id] = nil
       redirect_to '/', notice: 'またきてね！'
     else
-      redirect_to '/', notice: '権限がありません。'
+      redirect_to "/users/#{@user.nickname}", notice: '権限がありません。'
     end
 
   end
 
   def brock_user
     if @user.id != @current_user.id
-      redirect_to '/', notice: '権限がありません。'
+      redirect_to "/users/#{@user.nickname}", notice: '権限がありません。'
     end
   end
 

@@ -1,14 +1,15 @@
 class PostsController < ApplicationController
 	before_action :post_params, {only:[:create]}
-  before_action :brock_not_current_user, {only:[:show, :new, :create]}
-  before_action :find_post, {only:[:show, :destroy, :check_answer]}
+  before_action :brock_not_current_user, {only:[:show, :new, :create, :destroy]}
+  before_action :find_post, {only:[:show, :destroy, :check_answer, :brock_not_post_user]}
   before_action :find_answerer, {only:[:show, :check_answer]}
+  before_action :brock_not_post_user, {only:[:destroy]}
 
-  def index
-  	# @posts = Post.page(params[:page]).per(15).order(created_at: "DESC")
-   #  @comment = Comment.new
-   redirect_to '/'
-  end
+  # def index
+  # 	@posts = Post.page(params[:page]).per(15).order(created_at: "DESC")
+  #   @comment = Comment.new
+  #  redirect_to '/'
+  # end
 
   def show
   	@user = User.find(@post.user_id)
@@ -39,12 +40,12 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    user = User.find(@post.user_id)
     if @post
       @post.destroy
-      redirect_to '/'
+      redirect_to "/users/#{user.nickname}", notice: "削除しました。"
     else
-      flash[:notice] = "エラーが発生しました。"
-      redirect_to '/'
+      redirect_to '/users/#{user.nickname}', notice: "エラーが発生しました。"
     end
   end
 
@@ -82,6 +83,13 @@ class PostsController < ApplicationController
       redirect_to "/users/#{user.nickname}"
     else
       redirect_to "/"
+    end
+  end
+
+  def brock_not_post_user
+    user = User.find(@post.user_id)
+    if user.id != @current_user.id
+      redirect_to "/users/#{user.nickname}", notice: "権限がありません。"
     end
   end
 

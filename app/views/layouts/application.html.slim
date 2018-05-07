@@ -26,21 +26,25 @@ html
       header
         h3 = image_tag 'locqer_logo.png'
         - if @current_user
-          - if @user && uri != '/' && uri == "/users/#{@user.id}/edit"
-            = link_to :back, class: 'border-none btn-black' do
-              p.back-btn
-                i.fa.fa-angle-left
-          - if uri == "/users/#{@current_user.nickname}"
+          - if @current_user && uri != '/' && uri != "/users/#{@current_user.nickname}"
+            p = link_to 'マイページ', "/users/#{@current_user.nickname}", class: 'border-none btn-white header-menu header-mypage'
+          - elsif uri == "/users/#{@current_user.nickname}"
             p = link_to 'ログアウト', '/logout', class: 'border-none btn-white header-menu header-mypage', method: 'post'
           - if uri != '/posts/new'
             p.header-menu.header-new = link_to 'つぶやく', '/posts/new', class: 'border-none btn-white'
     - if flash[:notice]
       .flash#flash-head
-        p = flash[:notice]
+        .text
+          p = flash[:notice]
+    - if @current_user && session[:new_user] && uri != "/posts/new"
+      .new-user-modal
+        i.fa.fa-caret-up
+        .text
+          p さっそく投稿してみよう！
     - if !@current_user && uri != '/'
       footer
         .footer-btn
-          p.footer-signup = link_to 'サインアップ', '/signup', class: 'border-none btn-white'
+          p.footer-signup = link_to 'サインアップ', '/', class: 'border-none btn-white'
           p.footer-login = link_to 'ログイン', "/auth/twitter", class: 'border-none btn-white'
 
   #modal
