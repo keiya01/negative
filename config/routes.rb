@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/agreement' => 'home#agreement'
+
   # root 'posts#index'
   get 'posts/new' => 'posts#new'
   post 'posts/create' => 'posts#create'
