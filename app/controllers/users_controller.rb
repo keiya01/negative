@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   def show
     posts = Post.where(user_id: @user.id).order(created_at: 'DESC')
     @posts = Kaminari.paginate_array(posts).page(params[:page]).per(15)
+    @new_post = Post.find(session[:new_post]) if session[:new_post]
   end
 
 	def new
