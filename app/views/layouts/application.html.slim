@@ -36,7 +36,7 @@ html
       .flash#flash-head
         .text
           p = flash[:notice]
-    - if @current_user && session[:new_user] && uri != "/posts/new"
+    - if @current_user && !@user_post && uri != "/posts/new"
       .new-user-modal
         i.fa.fa-caret-up
         .text

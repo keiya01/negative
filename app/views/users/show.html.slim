@@ -11,8 +11,10 @@
     - if @current_user && @current_user.id == @user.id
       p.setting-btn = link_to "設定", "/users/#{@user.nickname}/edit", class: 'border-none'
   .user-post-contents
-    - if !@posts.blank?
+    - if @user_post
       p.question-notice 問題に答えてみよう！
+    - else
+      p.question-notice 問題を投稿してみよう！
     = render partial: "user_post"
     = paginate @posts
 - if !@current_user

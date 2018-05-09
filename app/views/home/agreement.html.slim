@@ -59,6 +59,6 @@
    | から必要事項を記入しご連絡くださいますようお願いいたします。
   p 最終更新日 ： 2018年2月16日
 - if @current_user
- p.back-top = link_to '投稿一覧へ', '/', class: "border-none back-top-btn"
+ p.back-top = link_to 'マイページへ', "/users/#{@current_user.nickname}", class: "border-none back-top-btn"
 - else
  p.back-top = link_to 'TOPへ', '/', class: "border-none back-top-btn"
