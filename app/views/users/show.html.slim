@@ -6,7 +6,12 @@
       .user-noimg = @user.username[0]
     h3 = @user.username
     .tweet-btn
-      = social_share_button_tag("LOCQERに問題を追加したよ！問題：「#{@new_post.question}」問題に答えてみよう！")
+      - if @new_post
+        = social_share_button_tag("LOCQERに問題を追加したよ！問題：「#{@new_post.question}」問題に答えてみよう！")
+      - elsif　@current_user
+        = social_share_button_tag("LOCQERを始めたよ！私の問題に問題に答えてみて！")
+      - else
+        = social_share_button_tag("#{@user.username}さんのページだよ！面白いから問題に答えてみて！")
       p URLをツイートして友達に思いを伝えよう！
     - if @current_user && @current_user.id == @user.id
       p.setting-btn = link_to "設定", "/users/#{@user.nickname}/edit", class: 'border-none'
