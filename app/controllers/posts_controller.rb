@@ -26,6 +26,17 @@ class PostsController < ApplicationController
   def new
     @random = SecureRandom.hex(10)
   	@post = Post.new
+    @question_samples = [
+      {'name' => '誕生日', 'text' => 'わたしの誕生日は？'},
+      {'name' => '好きな人', 'text' => 'わたしの好きな人は？'},
+      {'name' => '趣味', 'text' => 'わたしの趣味は？'},
+      {'name' => '武勇伝', 'text' => 'わたしの武勇伝は？'},
+      {'name' => '歌手', 'text' => 'わたしの好きな歌手は？'},
+      {'name' => 'スポーツ', 'text' => 'わたしの尊敬するスポーツ選手は？'},
+      {'name' => '座右の銘', 'text' => 'わたしの座右の銘は？'},
+      {'name' => '好み', 'text' => 'わたしの好みのタイプは？'},
+      {'name' => '食べ物', 'text' => 'わたしの好きな食べ物は？'}
+    ]
   end
 
   def create

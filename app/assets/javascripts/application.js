@@ -45,4 +45,9 @@ $(document).on('turbolinks:load', function() {
 		};
 	};
 	headerFlash("#flash-head");
+
+	$('.question-sample-text').on('click',function(){
+		var $questionText = $(this).data('question_text');
+		$('#question-text').val($questionText);
+	})
 });

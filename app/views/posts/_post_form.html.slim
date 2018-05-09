@@ -8,7 +8,10 @@
   	  = f.text_area :body, placeholder: 'あなたの秘密・思いは何ですか？(例：実は○○さんのことが好きです。)※ここの部分は問題に正解した人しか見ることが出来ません。', maxlength: 500, rows: 15
   	  = f.hidden_field :user_id, value: @current_user.id
       = f.label :question, "問題(150文字まで)"
-  	  = f.text_area :question, placeholder: '友達だけが知っていることは？（例：ABC君の誕生日は？）', maxlength: 150, rows: 8
+      .question-sample
+        - @question_samples.each do |sample|
+          p.question-sample-text data-question_text="#{sample['text']}" = sample['name']
+  	  = f.text_area :question, placeholder: '友達だけが知っていることは？（例：ABC君の誕生日は？）', maxlength: 150, rows: 8, id: "question-text"
       = f.label :answer, "答え(30文字まで)"
   	  = f.text_area :answer, placeholder: '問題の答えは？（例：5月10日）', maxlength: 30, rows: 3
       = f.label :count, "公開人数"

@@ -11,7 +11,7 @@
       p.post-time = simple_time(@post.created_at)
       .clear-right.clear-left
   .answerer-list
-    h5 正解者
+    h5 あなたをよく知る人
     - @answerers.each do |answerer|
       .answerer
         - if answerer.user_id != 0
@@ -19,8 +19,6 @@
           .answerer-user
             = image_tag @user.image, class: 'answerer-img'
             p.answerer-name = @user.username
-        - else
-          p.answerer-guest ゲスト
         .clear-left
         .answerer-menu
           p.answerer-rank 
@@ -29,4 +27,8 @@
            | 位
           .clear-left
           p.answerer-time = simple_time(answerer.created_at)
-        
+  - if @answerers.blank?
+    p.no-answer-notice
+     | まだ正解者がいません。
+     br
+     | ツイートしてみよう！

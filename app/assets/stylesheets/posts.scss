@@ -187,6 +187,40 @@
 	color: #aaa;
 	font-size: 13px;
 }
+.no-answer-notice{
+	text-align: center;
+	font-weight: bold;
+	color: #aaa;
+	font-size: 17px;
+	margin-top: 20px;
+}
+
+//form-question
+.question-sample{
+	width: 100%;
+	height: 50px;
+	white-space: nowrap;
+	overflow-x: auto;
+	overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    background-color: #eee;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    padding-top: 8px;
+    box-shadow: 2px 2px #ccc inset;
+}
+.question-sample::-webkit-scrollbar {
+    display: none;
+}
+.question-sample-text{
+	display: inline-block;
+	padding: 7px 10px;
+	font-size: 13px;
+	background-color: #fff;
+	box-shadow: 3px 2px 5px #bbb;
+	border-radius: 5px;
+	margin: 0 5px;
+}
 
 @media screen and (min-width: 480px){
 	// form
