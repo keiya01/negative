@@ -223,6 +223,7 @@ textarea{
 	padding: 15px;
 	border-radius: 20px;
 	border: 1.5px solid #4169e1;
+	font-size: 16px;
 }
 .form-area textarea:focus{
 	outline: none;
@@ -234,6 +235,7 @@ textarea{
 	margin-top: 5px;
 	border-radius: 5px;
 	border: 1.5px solid #4169e1;
+	font-size: 16px;
 }
 .form-area input[type="text"]:focus{
 	outline: none;
@@ -245,6 +247,7 @@ textarea{
 	margin: 0 auto;
 	margin-top: 50px;
 	border: 1px solid #4169e1;
+	font-size: 16px;
 }
 .form-area input[type="submit"]:focus{
 	border: 1px solid #B6FF01;
@@ -252,7 +255,7 @@ textarea{
 .form-area select{
 	border: 1px solid #4169e1;
 	padding: 5px;
-	font-size:14px;
+	font-size:16px;
 	margin-top:5px;
 }
 .form-area select:focus{

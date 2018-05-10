@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   end
 
 	def new
+    @users = User.all.limit(5).order(created_at: 'DESC')
 	end
 
 	def create
