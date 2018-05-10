@@ -7,7 +7,8 @@
 	width: 90%;
 	max-width: 480px;
 	margin: 0 auto;
-	padding-top: 50px;
+	padding: 50px 0;
+	text-align: center;
 }
 .user-top{
 	background-color: #4169e1;
@@ -28,9 +29,11 @@
 	height: 100%;
 	width: 60%;
 	max-width: 480px;
+	border: 1px solid #4169e1;
 	background-color: #fff;
 	border-radius: 10px;
 	margin: 20px 0;
+	text-align: center;
 }
 .new-user-list h3{
 	color: #555;
@@ -41,7 +44,6 @@
 	border-top: 1px solid #eee;
 	padding: 12px 0;
 	text-align: center;
-	position: relative;
 }
 .new-user img{
 	display: inline-block;
@@ -67,6 +69,13 @@
 	color: #333;
 	font-weight: bold;
 	padding-top: 5px;
+	width: 150px;
+	margin: 0 auto;
+	overflow: hidden;
+	white-space: nowrap;
+ 	text-overflow: ellipsis;
+ 	-webkit-text-overflow: ellipsis;
+ 	-o-text-overflow: ellipsis;
 }
 .top-text{
 	display: inline-block;
@@ -85,7 +94,7 @@
 	height: 100%;
 	background-color: #fff;
 	text-align: center;
-	padding: 20% 10px;
+	padding-top: 20px;
 }
 .user-form h3{
 	display: none;

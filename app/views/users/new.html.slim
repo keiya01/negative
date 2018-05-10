@@ -10,17 +10,17 @@
        | ●あなたをよく知っている人は意外な人かも！
        br
        | ●大切な人だけに思いを伝えてみよう！
-    .new-user-list
-      h3 新着ユーザー
-      - @users.each do |user|
-        = link_to "/users/#{user.nickname}", class: "border-none" do
-          .new-user
-            - if !user.image.blank?
-              = image_tag user.image
-            - else
-              p.new-user-no-img = user.username[0]
-            p.new-user-name = user.username
-            .clear-left
+  .new-user-list
+    h3 新着ユーザー
+    - @users.each do |user|
+      = link_to "/users/#{user.nickname}", class: "border-none" do
+        .new-user
+          - if !user.image.blank?
+            = image_tag user.image
+          - else
+            p.new-user-no-img = user.username[0]
+          p.new-user-name = user.username
+          .clear-left
   .user-form
     h3 SignUp
     = link_to '/auth/twitter', class: 'border-none' do

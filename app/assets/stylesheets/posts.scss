@@ -131,6 +131,7 @@
 .answerer-user{
 	display: inline-block;
 	padding: 10px 0;
+	text-align: center;
 }
 .answerer-img{
 	float: left;
@@ -141,13 +142,16 @@
 	margin-bottom: 3px;
 }
 .answerer-name{
- 	white-space: nowrap;
+ 	max-width: 170px;
+	text-align: left;
+	overflow: hidden;
+	white-space: nowrap;
  	text-overflow: ellipsis;
  	-webkit-text-overflow: ellipsis;
  	-o-text-overflow: ellipsis;
 	float: left;
 	color: #333;
-	font-size: 20px;
+	font-size: 15px;
 	font-weight: bold;
 	padding-top: 20px;
 	padding-left: 5px;

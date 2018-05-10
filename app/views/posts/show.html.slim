@@ -16,12 +16,13 @@
       .answerer
         - if answerer.user_id != 0
           - @user = User.find(answerer.user_id)
-          .answerer-user
-            = image_tag @user.image, class: 'answerer-img'
-            p.answerer-name = @user.username
-        .clear-left
+          = link_to "/users/#{@user.nickname}", class: "border-none" do
+            .answerer-user
+              = image_tag @user.image, class: 'answerer-img'
+              p.answerer-name = @user.username
+            .clear-left
         .answerer-menu
-          p.answerer-rank 
+          p.answerer-rank
            | 第
            = answerer.number
            | 位
