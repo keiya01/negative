@@ -91,10 +91,13 @@ class PostsController < ApplicationController
           flash[:notice] = '解答済みです。'
         end
       else
-        if @answer_history.blank?
+        if @current_user && @answer_history.blank?
           @history = AnswerHistory.new(user_id: @current_user.id, post_id: @post.id, number: @post.check_count, check: false)
+          flash[:notice] = '不正解です！！'
+        else
+          redirect_to '/', notice: '不正解です！ログインしてください！'
+          return
         end
-        flash[:notice] = '不正解です！！'
       end
     else
       flash[:notice] = '定員に達しました。'
