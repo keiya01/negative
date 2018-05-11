@@ -3,7 +3,7 @@
     - active_color = 'background-color:#eeffff;'
   - else
     - active_color = ''
-  - @answerer = AnswerHistory.find_by(user_id: @current_user.id, post_id: post.id) if @current_user
+  - @answerer = AnswerHistory.find_by(user_id: @current_user.id, post_id: post.id, check: true) if @current_user
   - if @answerer || @current_user && @current_user.id == post.user_id
     .user-post style="#{active_color}"
       = link_to "/posts/#{post.random_key}", class: 'border-none' do

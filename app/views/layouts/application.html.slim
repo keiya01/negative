@@ -26,7 +26,10 @@ html
       header
         h3 = image_tag 'locqer_logo.png'
         - if @current_user
-          - if @current_user && uri != '/' && uri != "/users/#{@current_user.nickname}"
+          - if @post && uri == "/posts/#{@post.random_key}"
+            - user = User.find(@post.user_id)
+            p = link_to "戻る", "/users/#{user.nickname}", class: 'border-none btn-white header-menu header-mypage'
+          - elsif uri != '/' && uri != "/users/#{@current_user.nickname}"
             p = link_to 'マイページ', "/users/#{@current_user.nickname}", class: 'border-none btn-white header-menu header-mypage'
           - elsif uri == "/users/#{@current_user.nickname}"
             p = link_to 'ログアウト', '/logout', class: 'border-none btn-white header-menu header-mypage', method: 'post'

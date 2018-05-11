@@ -64,6 +64,7 @@ class PostsController < ApplicationController
   def check_answer
     user_answer = params[:answer]
     user = User.find(@post.user_id)
+    @answer_history = AnswerHistory.find_by(user_id: @current_user.id, post_id: @post.id)
     if @post.check_count < @post.count
       if @post.answer == user_answer || @current_user && session[:post_id]
         # 答えがあっているか、ログインユーザーのセッションidを持っていればパス
@@ -71,7 +72,12 @@ class PostsController < ApplicationController
           # ログインユーザーがAnswerHistoryに載っていないかつログインユーザーならパス。
           @post.check_count += 1
           @post.save
-          @history = AnswerHistory.new(user_id: @current_user.id, post_id: @post.id, number: @post.check_count)
+          if @answer_history
+            # すでにユーザーが回答していて、不正解のため履歴に残っていた場合trueを代入して正解判定にする。
+            @answer_history.check = true
+          else
+            @history = AnswerHistory.new(user_id: @current_user.id, post_id: @post.id, number: @post.check_count, check: true)
+          end
           @history.save
           # 正常に処理が終わったらここで終了
           redirect_to "/posts/#{@post.random_key}", notice: '正解です！！'
@@ -85,17 +91,16 @@ class PostsController < ApplicationController
           flash[:notice] = '解答済みです。'
         end
       else
+        if @answer_history.blank?
+          @history = AnswerHistory.new(user_id: @current_user.id, post_id: @post.id, number: @post.check_count, check: false)
+        end
         flash[:notice] = '不正解です！！'
       end
     else
       flash[:notice] = '定員に達しました。'
     end
-    # 不正解のとき、トップから問題を解くか、マイページから問題を解くかで遷移先を分岐
-    if params[:uri] == "/users/#{user.nickname}"
+    # 不正解のときマイページへ遷移
       redirect_to "/users/#{user.nickname}"
-    else
-      redirect_to "/"
-    end
   end
 
   def brock_not_post_user

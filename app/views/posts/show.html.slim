@@ -18,7 +18,10 @@
           - @user = User.find(answerer.user_id)
           = link_to "/users/#{@user.nickname}", class: "border-none" do
             .answerer-user
-              = image_tag @user.image, class: 'answerer-img'
+              - if !@user.image.blank?
+                = image_tag @user.image, class: 'answerer-img'
+              - else
+                p.answerer-noimg = @user.username[0]
               p.answerer-name = @user.username
             .clear-left
         .answerer-menu
