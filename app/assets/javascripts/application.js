@@ -58,4 +58,27 @@ $(document).on('turbolinks:load', function() {
 			$('#comment-text').val('');
 		}, 1000)
 	});
+
+	// flickity
+	$('#flickity-wrap').flickity({
+ 	   // ここでオプションを設定します。
+    	wrapAround: true,
+  		//　trueで無限スクロール。デフォルトはfalse。
+
+		contain: true,
+  	    //　trueでラッパー要素の中で収まるようにスクロールする。falseではみ出た部分に余白ができる。デフォルトはfalse。(wrapAround: trueの場合は無視される)
+
+  		cellAlign: 'center',
+   	    // セルの基準値を'center','left','right'で指定する。デフォルトは'center'。
+
+	    draggable: false,
+        // falseでドラッグやフリック操作が無効。デフォルトはtrue。
+
+        reseze: false,
+        // falseでリサイズした時にサイズ変更しない。デフォルトはtrue。
+
+        autoPlay: 5000
+        // trueで3秒間隔で自動スクロール。秒数を指定したい場合は1500などミリ秒で指定する。デフォルトはfalse。
+
+  });
 });
