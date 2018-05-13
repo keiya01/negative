@@ -8,7 +8,8 @@ class ApplicationController < ActionController::Base
   end
 
   def check_user_post
-    @user_post ||= Post.find_by(user_id: @user.id) if @user
+    user = User.find_by(nickname: params[:nickname])
+    @user_post ||= Post.find_by(user_id: user.id) if user
   end
 
   def brock_not_current_user
