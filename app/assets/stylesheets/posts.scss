@@ -161,12 +161,14 @@
 	border: 1.5px solid #ccc;
 	border-radius: 10px;
 	cursor: pointer;
+	table-layout: fixed;
 }
 .comment-contents{
 	height: 100%;
 	width: 100%;
 	min-height: 50px;
 	padding: 3px 5px;
+	word-wrap: break-word;
 }
 .comment-menu{
 	position: relative;

@@ -178,18 +178,19 @@
 	padding: 5px;
 	padding-bottom: 0;
 	cursor: pointer;
+	table-layout: fixed;
 }
 .post-contents{
 	height: 100%;
 	width: 100%;
 	min-height: 100px;
+	word-wrap: break-word;
 }
 .post-contents p{
 	text-align: left;
 	line-height: 1.7;
 	letter-spacing: 0.08em;
 	color: #333;
-	word-wrap: break-word;
 	padding: 0 5px;
 	padding-bottom: 10px;
 }

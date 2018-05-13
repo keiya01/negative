@@ -46,8 +46,16 @@ $(document).on('turbolinks:load', function() {
 	};
 	headerFlash("#flash-head");
 
+	// 問題サンプル
 	$('.question-sample-text').on('click',function(){
 		var $questionText = $(this).data('question_text');
 		$('#question-text').val($questionText);
 	})
+
+	// form val clean
+	$('#new_comment').submit(function(){
+		setTimeout(function(){
+			$('#comment-text').val('');
+		}, 1000)
+	});
 });
