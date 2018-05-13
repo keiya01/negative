@@ -9,9 +9,7 @@ class Post < ApplicationRecord
 	belongs_to :user
 
 	def add_presence_errors
-		if body.empty?
-			errors.add(:body, "を暴露しちゃおう！")
-		elsif question.empty?
+		if question.empty?
 			errors.add(:question, "を出して友達を厳選しよう！")
 		elsif answer.empty?
 			errors.add(:answer, "がわからないよ...")
