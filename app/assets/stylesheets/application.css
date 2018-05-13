@@ -212,14 +212,14 @@ textarea{
 	margin-bottom: 100px;
 }
 .form-area label{
-	padding-left: 15px;
+	padding-left: 10px;
 	font-size: 15px;
 	font-weight: bold;
 	color: #aaa;
 }
 .form-area textarea{
 	width: 100%;
-	margin-bottom: 8px;
+	margin-bottom: 15px;
 	padding: 15px;
 	border-radius: 20px;
 	border: 1.5px solid #4169e1;
@@ -253,14 +253,16 @@ textarea{
 	border: 1px solid #B6FF01;
 }
 .form-area select{
-	border: 1px solid #4169e1;
+	border: 1.5px solid #4169e1;
+	border-radius: 10px;
 	padding: 5px;
 	font-size:16px;
-	margin-top:5px;
+	margin-bottom: 15px;
 }
 .form-area select:focus{
 	outline: none;
-	border: 1px solid #B6FF01;
+	border: 1.5px solid #B6FF01;
+	border-radius: 0;
 }
 
 /*error*/

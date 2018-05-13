@@ -64,7 +64,7 @@ class PostsController < ApplicationController
   def check_answer
     user_answer = params[:answer]
     user = User.find(@post.user_id)
-    @answer_history = AnswerHistory.find_by(user_id: @current_user.id, post_id: @post.id)
+    @answer_history = AnswerHistory.find_by(user_id: @current_user.id, post_id: @post.id) if @current_user
     if @post.check_count < @post.count
       if @post.answer == user_answer || @current_user && session[:post_id]
         # 答えがあっているか、ログインユーザーのセッションidを持っていればパス
@@ -91,9 +91,13 @@ class PostsController < ApplicationController
           flash[:notice] = '解答済みです。'
         end
       else
-        if @current_user && @answer_history.blank?
+        if @current_user && !@answer_history
           @history = AnswerHistory.new(user_id: @current_user.id, post_id: @post.id, number: @post.check_count, check: false)
+          @history.save
           flash[:notice] = '不正解です！！'
+          puts "テスト:#{@history}"
+        elsif @current_user && @answer_history
+          flash[:notice] = '不正解です！よく考えて！'
         else
           redirect_to '/', notice: '不正解です！ログインしてください！'
           return

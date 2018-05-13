@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-	validates :body, length:{maximum: 500}
+	validates :body, length:{maximum: 100}
 	validates :question, length:{maximum: 150}
 	validates :answer, length:{maximum: 30}
 	validates :check_count, :user_id, presence: true
