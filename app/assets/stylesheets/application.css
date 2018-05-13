@@ -211,12 +211,6 @@ textarea{
 	margin: 0 auto;
 	margin-bottom: 100px;
 }
-.form-area label{
-	padding-left: 10px;
-	font-size: 15px;
-	font-weight: bold;
-	color: #aaa;
-}
 .form-area textarea{
 	width: 100%;
 	margin-bottom: 15px;

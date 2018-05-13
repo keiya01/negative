@@ -4,19 +4,19 @@
       p = message
   = form_for @post, url: posts_create_path do |f|
     .form-area
-  	  = f.hidden_field :user_id, value: @current_user.id
       = f.label :question, "問題(150文字まで)"
       .question-sample
         - @question_samples.each do |sample|
           p.question-sample-text data-question_text="#{sample['text']}" = sample['name']
-  	  = f.text_area :question, placeholder: '友達だけが知っていることは？（例：ABC君の誕生日は？）※上のボタンを押すと簡単に問題を作れるよ！', maxlength: 150, rows: 8, id: "question-text"
+      = f.text_area :question, placeholder: '友達だけが知っていることは？（例：ABC君の誕生日は？）※上のボタンを押すと簡単に問題を作れるよ！', maxlength: 150, rows: 8, id: "question-text"
       = f.label :answer, "答え(30文字まで)"
-  	  = f.text_area :answer, placeholder: '問題の答えは？（例：5月10日）', maxlength: 30, rows: 3
+      = f.text_area :answer, placeholder: '問題の答えは？（例：5月10日）', maxlength: 30, rows: 3
       = f.label :count, "公開人数"
       br
-  	  = f.select :count, [[3, '3人'],[5, '5人'],[8, '8人'],[10, '10人']], prompt: '公開人数を選択して下さい'
+      = f.select :count, [[3, '3人'],[5, '5人'],[8, '8人'],[10, '10人']], prompt: '公開人数を選択して下さい'
       = f.hidden_field :check_count, value: 0
       = f.hidden_field :random_key, value: "#{@random}"
+  	  = f.hidden_field :user_id, value: @current_user.id
       br
       = f.label :body, "秘密・思い(100文字まで)※任意"
       = f.text_area :body, placeholder: '正解した人に伝えたいことがあれば入力してください！(例：実は○○さんのことが好きです。)※ここの部分は問題に正解した人しか見ることが出来ません。', maxlength: 100, rows: 3

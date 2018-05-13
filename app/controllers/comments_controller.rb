@@ -1,15 +1,18 @@
 class CommentsController < ApplicationController
 
   def create
-  	@post = Post.find(params[:id])
-  	@comment = Comment.new(body: params[:body], post_id: @post.id, user_id: @current_user.id)
+  	@post = Post.find_by(random_key: params[:random_key])
+  	@comment = Comment.new(params_comment)
     if @comment.save
-      flash[:notice] = 'コメントしました。'
-      redirect_to '/'
+      redirect_to "/posts/#{@post.random_key}", notice: 'コメントしました。'
     else
-        flash[:notice] = 'コメントに失敗しました。'
-        redirect_to '/'
+        redirect_to "/posts/#{@post.random_key}", notice: 'コメントに失敗しました。'
     end
+  end
+
+  private
+  def params_comment
+    params.require('comment').permit(:body, :post_id, :user_id)
   end
 
 end

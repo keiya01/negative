@@ -13,6 +13,8 @@ class PostsController < ApplicationController
 
   def show
   	@user = User.find(@post.user_id)
+    @comments = Comment.where(post_id: @post.id).order(created_at: 'DESC')
+    @comment = Comment.new
     @answerers = AnswerHistory.where(post_id: @post.id).order(number: 'ASC')
     if @answerer || @current_user.id == @post.user_id
       return
@@ -66,19 +68,21 @@ class PostsController < ApplicationController
     user = User.find(@post.user_id)
     @answer_history = AnswerHistory.find_by(user_id: @current_user.id, post_id: @post.id) if @current_user
     if @post.check_count < @post.count
-      if @post.answer == user_answer || @current_user && session[:post_id]
+      if @post.answer == user_answer || @current_user && session[:post_id] == @post.id
         # 答えがあっているか、ログインユーザーのセッションidを持っていればパス
-        if @current_user && !@answerer
+        if @current_user && @current_user.id != user.id
           # ログインユーザーがAnswerHistoryに載っていないかつログインユーザーならパス。
           @post.check_count += 1
           @post.save
           if @answer_history
             # すでにユーザーが回答していて、不正解のため履歴に残っていた場合trueを代入して正解判定にする。
             @answer_history.check = true
+            @answer_history.count = @post.check_count
+            @answer_history.save
           else
             @history = AnswerHistory.new(user_id: @current_user.id, post_id: @post.id, number: @post.check_count, check: true)
+            @history.save
           end
-          @history.save
           # 正常に処理が終わったらここで終了
           redirect_to "/posts/#{@post.random_key}", notice: '正解です！！'
           return

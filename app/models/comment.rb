@@ -1,3 +1,4 @@
 class Comment < ApplicationRecord
-	validates :body, presence: true, length:{maximum: 150}
+	validates :body, :user_id, :post_id, presence: true
+	validates :body, length:{maximum: 150, message: 'が長過ぎるみたい！'}
 end

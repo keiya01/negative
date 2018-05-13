@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'posts/:random_key/check' => 'posts#check_answer'
   get 'posts/:random_key' => 'posts#show'
 
-  post 'comments/:id/create' => 'comments#create'
+  post 'comments/:random_key/create' => 'comments#create'
 
   get 'users/:nickname/edit' => 'users#edit'
   patch 'users/:nickname/update' => 'users#update'

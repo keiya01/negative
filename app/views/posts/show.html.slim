@@ -1,15 +1,39 @@
 .post-page
-  .post-show
-    .post-contents
-      p.post-body = html_escape(@post.body).gsub(/\n/, '<br>').html_safe
-    .post-menu
-      - if !@user.image.blank?
-        = image_tag @user.image, class: 'post-user-img'
-      - else
-        p.post-user-noimg = @user.username[0]
-      p.post-user = link_to @user.username, "/users/#{@user.nickname}", class: "border-none btn-black"
-      p.post-time = simple_time(@post.created_at)
-      .clear-right.clear-left
+  - if !@post.body.blank?
+    .post-show
+      .post-contents
+        p.post-body = html_escape(@post.body).gsub(/\n/, '<br>').html_safe
+      .post-menu
+        - if !@user.image.blank?
+          = image_tag @user.image, class: 'post-user-img'
+        - else
+          p.post-user-noimg = @user.username[0]
+        p.post-user = link_to @user.username, "/users/#{@user.nickname}", class: "border-none btn-black"
+        p.post-time = simple_time(@post.created_at)
+        .clear-right.clear-left
+  .post-comment
+    h3 メッセージ
+    - @comments.each do |comment|
+      - comment_user = User.find_by(id: comment.user_id)
+      .comment
+        .comment-contents
+          p.post-body = html_escape(comment.body).gsub(/\n/, '<br>').html_safe
+        .comment-menu
+          - if !comment_user.image.blank?
+            = image_tag comment_user.image, class: 'post-user-img'
+          - else
+            p.post-user-noimg = comment_user.username[0]
+          p.post-user = link_to comment_user.username, "/users/#{comment_user.nickname}", class: "border-none btn-black"
+          p.post-time = simple_time(comment.created_at)
+          .clear-right.clear-left
+    = form_for @comment, url: "/comments/#{@post.random_key}/create" do |f|
+      .comment-form
+        = f.text_area :body, placeholder: "#{@user.username}にメッセージを飛ばしてみよう！", maxlength: 150, rows: 8, id: "comment-text"
+        = f.hidden_field :user_id, value: @current_user.id
+        = f.hidden_field :post_id, value: @post.id
+        br
+        = f.submit value: 'メッセージを送る', data: { disable_with: "送信中..." }, class: 'button-simple'
+        .clear-right
   .answerer-list
     h5 あなたをよく知る人
     - @answerers.each do |answerer|
@@ -31,8 +55,8 @@
            | 位
           .clear-left
           p.answerer-time = simple_time(answerer.created_at)
-  - if @answerers.blank?
-    p.no-answer-notice
-     | まだ正解者がいません。
-     br
-     | ツイートしてみよう！
+    - if @answerers.blank?
+        p.no-answer-notice
+         | まだ正解者がいません。
+         br
+         | ツイートしてみよう！
