@@ -23,8 +23,11 @@ class UsersController < ApplicationController
     elsif !user.email.blank?
       session[:user_id] = user.id
       flash[:notice] = "ログインしました！"
-      if session[:post_id]
-        @post = Post.find(session[:post_id])
+      if session[:correct_user]
+        @post = Post.find(session[:correct_user])
+        redirect_to "/posts/#{@post.random_key}/check"
+      elsif session[:wrong_user]
+        @post = Post.find(session[:wrong_user])
         redirect_to "/posts/#{@post.random_key}/check"
       else
         redirect_to "/users/#{user.nickname}"

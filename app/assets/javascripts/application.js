@@ -71,13 +71,10 @@ $(document).on('turbolinks:load', function() {
   		cellAlign: 'center',
    	    // セルの基準値を'center','left','right'で指定する。デフォルトは'center'。
 
-	    draggable: false,
-        // falseでドラッグやフリック操作が無効。デフォルトはtrue。
-
         reseze: false,
         // falseでリサイズした時にサイズ変更しない。デフォルトはtrue。
 
-        autoPlay: 5000
+        autoPlay: 1500
         // trueで3秒間隔で自動スクロール。秒数を指定したい場合は1500などミリ秒で指定する。デフォルトはfalse。
 
   });

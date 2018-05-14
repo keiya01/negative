@@ -68,7 +68,7 @@ class PostsController < ApplicationController
     user = User.find(@post.user_id)
     @answer_history = AnswerHistory.find_by(user_id: @current_user.id, post_id: @post.id) if @current_user
     if @post.check_count < @post.count
-      if @post.answer == user_answer || @current_user && session[:post_id] == @post.id
+      if @post.answer == user_answer || @current_user && session[:correct_user] == @post.id
         # 答えがあっているか、ログインユーザーのセッションidを持っていればパス
         if @current_user && @current_user.id != user.id
           # ログインユーザーがAnswerHistoryに載っていないかつログインユーザーならパス。
@@ -77,7 +77,7 @@ class PostsController < ApplicationController
           if @answer_history
             # すでにユーザーが回答していて、不正解のため履歴に残っていた場合trueを代入して正解判定にする。
             @answer_history.check = true
-            @answer_history.count = @post.check_count
+            @answer_history.number = @post.check_count
             @answer_history.save
           else
             @history = AnswerHistory.new(user_id: @current_user.id, post_id: @post.id, number: @post.check_count, check: true)
@@ -88,21 +88,22 @@ class PostsController < ApplicationController
           return
         elsif !@current_user
           # 正解したらサインアップフォームへ行き、登録後に正解ページへリダイレクトする。
-          session[:post_id] = @post.id
+          session[:correct_user] = @post.id
           redirect_to '/', notice: '正解です！ログインしてください！'
           return
         else
           flash[:notice] = '解答済みです。'
         end
       else
-        if @current_user && !@answer_history
+        if @current_user && !@answer_history || @current_user && session[:wrong_user] == @post.id
           @history = AnswerHistory.new(user_id: @current_user.id, post_id: @post.id, number: @post.check_count, check: false)
           @history.save
           flash[:notice] = '不正解です！！'
-          puts "テスト:#{@history}"
         elsif @current_user && @answer_history
           flash[:notice] = '不正解です！よく考えて！'
         else
+          # 不正解ならサインアップフォームへ行き、登録後にAnswerHistoryに書き込む。
+          session[:wrong_user] = @post.id
           redirect_to '/', notice: '不正解です！ログインしてください！'
           return
         end
