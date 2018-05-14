@@ -7,7 +7,7 @@
     h3 = @user.username
     .tweet-btn
       - if !@new_post.blank?
-        = social_share_button_tag("LOCQERに問題を追加したよ！問題：「#{@new_post.question}」問題に答えてみよう！")
+        = social_share_button_tag("LOCQERに問題を追加したよ！\n問題：「#{@new_post.question}」\n問題に答えてみよう！")
       - elsif !@current_user.blank? && @current_user.id == @user.id
         = social_share_button_tag("LOCQERを始めたよ！私の問題に答えてみて！")
       - else

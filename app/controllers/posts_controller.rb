@@ -71,7 +71,7 @@ class PostsController < ApplicationController
       if @post.answer == user_answer || @current_user && session[:correct_user] == @post.id
         # 答えがあっているか、ログインユーザーのセッションidを持っていればパス
         if @current_user && @current_user.id != user.id
-          # ログインユーザーがAnswerHistoryに載っていないかつログインユーザーならパス。
+          # ログインユーザーかつログインユーザーと回答ユーザーのidが違うならパス。
           @post.check_count += 1
           @post.save
           if @answer_history
@@ -117,9 +117,7 @@ class PostsController < ApplicationController
 
   def brock_not_post_user
     user = User.find(@post.user_id)
-    if user.id != @current_user.id
-      redirect_to "/users/#{user.nickname}", notice: "権限がありません。"
-    end
+    redirect_to "/users/#{user.nickname}", notice: "権限がありません。" if user.id != @current_user.id
   end
 
   private
