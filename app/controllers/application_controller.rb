@@ -4,7 +4,15 @@ class ApplicationController < ActionController::Base
   before_action :check_user_post
 
   def check_current_user
-  	@current_user ||= User.find(session[:user_id]) if session[:user_id]
+  	if (user_id = session[:user_id])
+      @current_user ||= User.find(user_id)
+    elsif (user_id = cookies.signed[:user_id])
+      user = User.find(user_id)
+      if user && user.authenticated?(cookies[:remember_token])
+        session[:user_id] = user.id
+        @current_user = user
+      end
+    end
   end
 
   def check_user_post

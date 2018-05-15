@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include UsersHelper
   before_action :brock_current_user, {only:[:new, :create]}
   before_action :brock_not_current_user, {only:[:edit, :update, :logout]}
   before_action :find_user, {only:[:show, :edit, :update, :brock_user]}
@@ -16,12 +17,17 @@ class UsersController < ApplicationController
 
 	def create
     user = User.find_or_create_from_auth_hash(request.env['omniauth.auth'])
-    if user.email.blank?
+    if user
       session[:user_id] = user.id
+      remember user
+    else
+      redirect_to '/'
+      return
+    end
+    if user.email.blank?
       session[:new_user] = user.id
       redirect_to "/users/#{user.nickname}/edit", notice: "Emailを登録してください"
     elsif !user.email.blank?
-      session[:user_id] = user.id
       flash[:notice] = "ログインしました！"
       if session[:correct_user]
         @post = Post.find(session[:correct_user])
@@ -58,6 +64,7 @@ class UsersController < ApplicationController
   def logout
     @user = User.find(session[:user_id])
     if @user
+      forget @user if @user.remember_digest != nil
       session[:user_id] = nil
       redirect_to '/', notice: 'またきてね！'
     else

@@ -26,7 +26,7 @@ class PostsController < ApplicationController
   end
 
   def new
-    @random = SecureRandom.hex(10)
+    @random = SecureRandom.urlsafe_base64
   	@post = Post.new
     @question_samples = [
       {'name' => '誕生日', 'text' => 'わたしの誕生日は？'},
@@ -89,7 +89,7 @@ class PostsController < ApplicationController
         elsif !@current_user
           # 正解したらサインアップフォームへ行き、登録後に正解ページへリダイレクトする。
           session[:correct_user] = @post.id
-          redirect_to '/', notice: '正解です！ログインしてください！'
+          redirect_to '/', notice: 'ログインすると結果を知ることが出来ます！'
           return
         else
           flash[:notice] = '解答済みです。'
@@ -104,7 +104,7 @@ class PostsController < ApplicationController
         else
           # 不正解ならサインアップフォームへ行き、登録後にAnswerHistoryに書き込む。
           session[:wrong_user] = @post.id
-          redirect_to '/', notice: '不正解です！ログインしてください！'
+          redirect_to '/', notice: 'ログインすると結果を知ることが出来ます！'
           return
         end
       end
