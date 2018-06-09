@@ -21,6 +21,7 @@ class User < ApplicationRecord
      user.nickname = nickname
      user.username = username
      user.image = image_url
+     user.password = "password"
    end
   end
 
