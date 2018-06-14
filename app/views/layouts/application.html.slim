@@ -50,10 +50,10 @@ html
           p.footer-signup = link_to 'サインアップ', '/', class: 'border-none btn-white'
           p.footer-login = link_to 'ログイン', "/auth/twitter", class: 'border-none btn-white'
 
-  #modal
+  .modal#delete-modal-form
     #delete-modal
       h3 問題に正解すると投稿を見ることができます!
-      = form_tag "#", method: 'get' do
+      = form_tag "#" do
         textarea name="answer" placeholder='' maxlength='150'
         .btn-zone
           input type="hidden" name="uri" value="#{uri}"

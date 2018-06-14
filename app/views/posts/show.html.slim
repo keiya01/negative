@@ -18,7 +18,10 @@
     = form_for @comment, url: "/comments/#{@post.random_key}/create", remote: true do |f|
       .comment-form
         = f.text_area :body, placeholder: "#{@user.username}にメッセージを飛ばしてみよう！", maxlength: 150, rows: 8, id: "comment-text"
-        = f.hidden_field :user_id, value: @current_user.id
+        - if @current_user
+          = f.hidden_field :user_id, value: @current_user.id
+        - else
+          = f.hidden_field :user_id, value: 0
         = f.hidden_field :post_id, value: @post.id
         br
         = f.submit value: 'メッセージを送る', data: { disable_with: "送信中..." }, class: 'button-simple', id: "comment-btn"
@@ -49,3 +52,5 @@
          | まだ正解者がいません。
          br
          | ツイートしてみよう！
+- if !@current_user
+  .footer-space

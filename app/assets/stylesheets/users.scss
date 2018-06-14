@@ -61,10 +61,11 @@
 	height: 100%;
 	background-color: #fff;
 	text-align: center;
-	padding-top: 20px;
+	padding-top: 30px;
 }
 .user-form h3{
-	display: none;
+	font-size: 18px;
+	color: #555;
 }
 .agreement-text{
 	font-size: 12px;
@@ -79,12 +80,102 @@
 	background-color: #00aced;
 	width: 100%;
 	padding: 8px 0;
+	border-radius: 20px;
+	margin-top: 30px;
+}
+.twitter-btn p{
 	color: #fff;
 	font-size: 0.95em;
-	border-radius: 20px;
 }
 .twitter-btn i{
 	padding-right: 5px;
+}
+.self-regist-btn{
+	display: inline-block;
+	background-color: tomato;
+	width: 100%;
+	padding: 8px 0;
+	border-radius: 20px;
+	margin-top: 20px;
+	cursor: pointer;
+}
+.self-regist-btn p{
+	color: #fff;
+	font-size: 0.95em;
+}
+.self-regist-btn i{
+	padding-right: 5px;
+}
+#regist-modal{
+	display: inline-block;
+	background-color: #fff;
+	width: 90%;
+	max-width: 480px;
+	margin-top: 100px;
+	border-radius: 20px;
+	padding-bottom: 30px;
+}
+#regist-modal h3{
+	font-size: 18px;
+	padding: 0 20px;
+	padding-top: 30px;
+	color: #333;
+}
+#regist-modal label{
+	float: left;
+	margin-top: 10px;
+	margin-left: 18px;
+	font-size: 15px;
+	color: #555;
+	font-weight: bold;
+}
+#regist-modal input[type="text"], #regist-modal input[type="password"]{
+	width: 95%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 20px;
+	font-size: 16px;
+}
+#regist-modal .btn-zone{
+	display: block;
+	padding: 0 50px;
+	margin: 0 auto;
+	text-align: center;
+}
+.common-regist-btn{
+	color: white;
+	display: inline-block;
+	width: 80%;
+	font-size: 15px;
+	padding: 8px 25px;
+	border-radius: 30px;
+	cursor: pointer;
+}
+.regist-btn{
+	background-color: #4169e1;
+	margin-top: 15px;
+}
+.unregist-btn{
+	background-color: tomato;
+	margin-top: 10px;
+}
+@media screen and (min-width: 480px){
+	// modal
+	#regist-modal h3{
+		padding: 0;
+		padding-top: 30px;
+	}
+	.common-regist-btn{
+		margin-top: 30px;
+		width: 40%;
+	}
+	.regist-btn{
+		float: left;
+	}
+	.unregist-btn{
+		float: right;
+	}
+
 }
 
 // show

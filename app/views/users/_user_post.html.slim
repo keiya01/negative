@@ -4,7 +4,10 @@
   - else
     - active_color = ''
   - @answerer = AnswerHistory.find_by(user_id: @current_user.id, post_id: post.id, check: true) if @current_user
-  - @wrong_answerers = AnswerHistory.where(post_id: post.id, check: false).limit(4)
+  - @wrong_answerers = AnswerHistory.where(post_id: post.id, check: false)
+  - @wrong_answerers.each do |i|
+    - int = 1
+    - p "TEST: #{int + 1}"
   - if @answerer || @current_user && @current_user.id == post.user_id
     .user-post style="#{active_color}"
       = link_to "/posts/#{post.random_key}", class: 'border-none' do
@@ -23,14 +26,10 @@
           p.post-user-noimg = @user.username[0]
         p.post-user = @user.username
         .wrong-space
-          p.wrong-user-list 不正解者：
-          - @wrong_answerers.each do |answerer|
-            - wrong_user = User.find(anwerer.user_id)
-            - if !wrong_user.image.blank?
-              p.wrong-user
-               = image_tag wrong_user.image
-            - else
-              p.wrong-user-no-img = wrong_user.username[0]
+          p.wrong-user-list 
+           | 不正解者：
+           = @wrong_answerers.size
+           | 人
         p.post-time = simple_time(post.created_at)
         .clear-right.clear-left
   - else
@@ -51,12 +50,9 @@
           p.post-user-noimg = @user.username[0]
         p.post-user = @user.username
         .wrong-space
-          p.wrong-user-list 不正解者：
-          - @wrong_answerers.each do |wrong_answerer|
-            - wrong_user = User.find(wrong_answerer.user_id)
-            - if !wrong_user.image.blank?
-              = image_tag wrong_user.image, class: 'wrong-user-img'
-            - else
-              p.wrong-user-no-img = wrong_user.username[0]
+          p.wrong-user-list 
+           | 不正解者：
+           = @wrong_answerers.size
+           | 人
         p.post-time = simple_time(post.created_at)
         .clear-right.clear-left

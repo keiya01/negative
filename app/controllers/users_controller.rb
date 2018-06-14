@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_action :brock_not_current_user, {only:[:edit, :update, :logout]}
   before_action :find_user, {only:[:show, :edit, :update, :brock_user]}
   before_action :brock_user, {only:[:edit, :update]}
+  before_action :out_correct_user
 
   def show
     posts = Post.where(user_id: @user.id).order(created_at: 'DESC')
@@ -13,33 +14,34 @@ class UsersController < ApplicationController
 
 	def new
     @users = User.all.limit(5).order(created_at: 'DESC')
+    @user = User.new
 	end
 
 	def create
-    user = User.find_or_create_from_auth_hash(request.env['omniauth.auth'])
-    if user
+    if params[:auth] == 'self'
+      self_user = User.new(user_params)
+    else
+      twitter_user = User.find_or_create_from_auth_hash(request.env['omniauth.auth'])
+      twitter_info = request.env['omniauth.auth']
+      twitter_nickname = twitter_info['info']['nickname']
+      twitter_username = twitter_info['info']['name']
+      twitter_image = twitter_info['info']['image']
+      User.update(nickname: twitter_nickname) if user.nickname != twitter_nickname
+      User.update(username: twitter_username) if user.username != twitter_username
+      User.update(image: twitter_image) if user.image != twitter_image
+    end
+    if twitter_user || self_user
       session[:user_id] = user.id
       remember user
     else
-      redirect_to '/'
+      render 'users/new'
       return
     end
     if user.email.blank?
       session[:new_user] = user.id
       redirect_to "/users/#{user.nickname}/edit", notice: "Emailを登録してください"
     elsif !user.email.blank?
-      flash[:notice] = "ログインしました！"
-      if session[:correct_user]
-        @post = Post.find(session[:correct_user])
-        redirect_to "/posts/#{@post.random_key}/check"
-      elsif session[:wrong_user]
-        @post = Post.find(session[:wrong_user])
-        redirect_to "/posts/#{@post.random_key}/check"
-      else
-        redirect_to "/users/#{user.nickname}"
-      end
-    else
-      redirect_to "/users/#{user.nickname}", notice: "エラーが発生しました。"
+        redirect_to "/users/#{user.nickname}", notice: "ログインしました！"
     end
   end
 
@@ -48,7 +50,6 @@ class UsersController < ApplicationController
 
   def update
     if @user
-      @user.username = params[:user][:username]
       @user.email = params[:user][:email]
       if @user.save && session[:post_id]
         post = Post.find(session[:post_id])
@@ -81,6 +82,10 @@ class UsersController < ApplicationController
 
 
   private
+  def user_params
+    params.require('user').permit(:nickname, :username, :password)
+  end
+
   def find_user
     @user = User.find_by(nickname: params[:nickname])
   end

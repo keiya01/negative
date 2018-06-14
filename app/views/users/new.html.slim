@@ -20,12 +20,39 @@
     div
       = image_tag 'IMG_8356.JPG'
   .user-form
-    h3 SignUp
+    h3
+     i.fa.fa-arrow-down
+     |  登録・ログイン方法を選択 
+     i.fa.fa-arrow-down
     = link_to '/auth/twitter', class: 'border-none' do
-      p.twitter-btn
-        i.fa.fa-twitter
-        | Twitterで登録して思いを伝える
+      .twitter-btn
+        p
+         i.fa.fa-twitter
+         | Twitterアカウントで思いを伝える
+    .self-regist-btn#open-regist-btn
+      p
+       i.fa.fa-user
+       | LOCQERアカウントで思いを伝える
     p.agreement-text
       | ※登録することで
       = link_to '利用規約', '/agreement', class: 'agreement-btn border-none'
       | に同意したものとします。
+
+.modal#user-regist-modal
+  #regist-modal
+    h3 ユーザー登録！
+    - @user.errors.full_messages.each do |message|
+      .error
+        p = message
+    = form_for @user, url: "/users/create/self" do
+      label ニックネーム(半角英数字で入力)
+      input type="text" name="nickname" placeholder='かぶらない値を入力してください！'
+      br
+      label 名前
+      input type="text" name="username" placeholder='サービス内で利用する名前を入力'
+      br
+      label パスワード
+      input type="password" name="password" placeholder='パスワードを入力'
+      .btn-zone
+        input type="submit" value='登録する' data-disable-with="送信中..." class='common-regist-btn regist-btn border-none btn-white'
+        .common-regist-btn.unregist-btn やめる

@@ -27,11 +27,21 @@ $(document).on('turbolinks:load', function() {
 		var $question = $(this).data('question');
 		$('#delete-modal').find('form').attr('action', '/posts/'+$id+'/check');
 		$('#delete-modal').find('textarea').attr('placeholder', '問題： '+$question);
-		$('#modal').show();
+		$('#delete-modal-form').show();
 		$('html, body').css('overflow', 'hidden');
 	});
 	$('.undelete-btn').on('click', function(){
-		$('#modal').hide();
+		$('#delete-modal-form').hide();
+	    $('html, body').css('overflow', 'auto');
+	});
+
+	//regist-modal
+	$('.self-regist-btn').on('click', function(){
+		$('#user-regist-modal').show();
+		$('html, body').css('overflow', 'hidden');
+	});
+	$('.unregist-btn').on('click', function(){
+		$('#user-regist-modal').hide();
 	    $('html, body').css('overflow', 'auto');
 	});
 

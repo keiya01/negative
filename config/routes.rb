@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'posts/new' => 'posts#new'
   post 'posts/create' => 'posts#create'
   post 'posts/:random_key/destroy' => 'posts#destroy'
-  get 'posts/:random_key/check' => 'posts#check_answer'
+  post 'posts/:random_key/check' => 'posts#check_answer'
   get 'posts/:random_key' => 'posts#show'
 
   post 'comments/:random_key/create' => 'comments#create'
@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'users/:nickname/edit' => 'users#edit'
   patch 'users/:nickname/update' => 'users#update'
   root 'users#new'
+  post 'users/create/:auth' => 'users#create'
   get 'users/:nickname' => 'users#show'
   get 'auth/:provider/callback' => 'users#create'
   post 'logout' => 'users#logout'

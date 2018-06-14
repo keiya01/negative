@@ -2,12 +2,10 @@ class User < ApplicationRecord
   # mount_uploader :image, ImageUploader
   attr_accessor :remember_token
   has_secure_password
-  validates :provider, :uid, :nickname, presence: true
   validate :add_presence_errors
   validates :email, uniqueness: {message: "は他の人が先に登録しているみたい..."}, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: "は正しくないよ！" }, on: :update
   validates :nickname, uniqueness: {message: "は他の人が先に登録しているみたい..."}
   has_many :posts, dependent: :destroy
-  has_many :answer_histories, dependent: :destroy
 
 
   def self.find_or_create_from_auth_hash(auth_hash)

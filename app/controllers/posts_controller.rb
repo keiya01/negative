@@ -1,9 +1,10 @@
 class PostsController < ApplicationController
 	before_action :post_params, {only:[:create]}
-  before_action :brock_not_current_user, {only:[:show, :new, :create, :destroy]}
+  before_action :brock_not_current_user, {only:[:new, :create, :destroy]}
   before_action :find_post, {only:[:show, :destroy, :check_answer, :brock_not_post_user]}
   before_action :find_answerer, {only:[:show, :check_answer]}
   before_action :brock_not_post_user, {only:[:destroy]}
+  before_action :out_correct_user, {except: [:show]}
 
   # def index
   # 	@posts = Post.page(params[:page]).per(15).order(created_at: "DESC")
@@ -16,12 +17,12 @@ class PostsController < ApplicationController
     @comments = Comment.where(post_id: @post.id).order(created_at: 'DESC')
     @comment = Comment.new
     @answerers = AnswerHistory.where(post_id: @post.id).order(number: 'ASC')
-    if @answerer || @current_user.id == @post.user_id
+    if @answerer || @current_user && @current_user.id == @post.user_id || session[:correct_user] == @post.id
       return
     else
       # ログインユーザーがAnswerHistoryに載っていないか、投稿主idとログインユーザが一致しなければリダイレクト。
       flash[:notice] = "問題に答えてください。"
-      redirect_to '/'
+      redirect_to "/users/#{@user.nickname}"
     end
   end
 
@@ -67,52 +68,40 @@ class PostsController < ApplicationController
     user_answer = params[:answer]
     user = User.find(@post.user_id)
     @answer_history = AnswerHistory.find_by(user_id: @current_user.id, post_id: @post.id) if @current_user
+      # 公開人数と問題に正解した人の数を比較
     if @post.check_count < @post.count
-      if @post.answer == user_answer || @current_user && session[:correct_user] == @post.id
-        # 答えがあっているか、ログインユーザーのセッションidを持っていればパス
-        if @current_user && @current_user.id != user.id
+        # 答えがあっていればパス
+      if @post.answer == user_answer
           # ログインユーザーかつログインユーザーと回答ユーザーのidが違うならパス。
+        if !@current_user || @current_user.id != user.id
           @post.check_count += 1
           @post.save
-          if @answer_history
-            # すでにユーザーが回答していて、不正解のため履歴に残っていた場合trueを代入して正解判定にする。
-            @answer_history.check = true
-            @answer_history.number = @post.check_count
-            @answer_history.save
-          else
-            @history = AnswerHistory.new(user_id: @current_user.id, post_id: @post.id, number: @post.check_count, check: true)
-            @history.save
-          end
+          # 条件によってAnswerHistoryに保存する方法を変更する
+          correct_answer_history_save(@answer_history, @post, @current_user)
           # 正常に処理が終わったらここで終了
           redirect_to "/posts/#{@post.random_key}", notice: '正解です！！'
           return
-        elsif !@current_user
-          # 正解したらサインアップフォームへ行き、登録後に正解ページへリダイレクトする。
-          session[:correct_user] = @post.id
-          redirect_to '/', notice: 'ログインすると結果を知ることが出来ます！'
-          return
         else
-          flash[:notice] = '解答済みです。'
+          flash[:notice] = '無効な回答です。'
+          redirect_to "/users/#{user.nickname}"
         end
       else
-        if @current_user && !@answer_history || @current_user && session[:wrong_user] == @post.id
+        flash[:notice] = '不正解です！！'
+        if @current_user && !@answer_history
           @history = AnswerHistory.new(user_id: @current_user.id, post_id: @post.id, number: @post.check_count, check: false)
           @history.save
-          flash[:notice] = '不正解です！！'
         elsif @current_user && @answer_history
           flash[:notice] = '不正解です！よく考えて！'
-        else
-          # 不正解ならサインアップフォームへ行き、登録後にAnswerHistoryに書き込む。
-          session[:wrong_user] = @post.id
-          redirect_to '/', notice: 'ログインすると結果を知ることが出来ます！'
-          return
+        elsif !@current_user
+          @history = AnswerHistory.new(post_id: @post.id, number: @post.check_count, check: false)
+          @history.save
         end
+        # 不正解のとき回答したユーザー問題ページへ遷移
+        redirect_to "/users/#{user.nickname}"
       end
     else
-      flash[:notice] = '定員に達しました。'
+      redirect_to "/users/#{user.nickname}", notice: '定員に達しました。'
     end
-    # 不正解のときマイページへ遷移
-      redirect_to "/users/#{user.nickname}"
   end
 
   def brock_not_post_user
@@ -132,5 +121,22 @@ class PostsController < ApplicationController
    def find_answerer
      @answerer = AnswerHistory.find_by(user_id: @current_user.id, post_id: @post.id) if @current_user
    end
+
+   def correct_answer_history_save(history, post, user)
+    if user && history
+      # すでにユーザーが回答していて、不正解のため履歴に残っていた場合trueを代入して正解判定にする。
+      history.check = true
+      history.number = post.check_count
+      history.save
+    elsif user && !history
+      new_history = AnswerHistory.new(user_id: user.id, post_id: post.id, number: post.check_count, check: true)
+      new_history.save
+    elsif !user
+      # ユーザーがログインしていない場合user_idに0を代入する
+      new_history = AnswerHistory.new(user_id: 0, post_id: post.id, number: post.check_count, check: true)
+      new_history.save
+      session[:correct_user] = post.id
+    end
+  end
 
 end
