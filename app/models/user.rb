@@ -1,10 +1,10 @@
 class User < ApplicationRecord
-  # mount_uploader :image, ImageUploader
+  mount_uploader :image, ImageUploader
   attr_accessor :remember_token
   has_secure_password
   validate :add_presence_errors
-  validates :email, uniqueness: {message: "は他の人が先に登録しているみたい..."}, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: "は正しくないよ！" }, on: :update
-  validates :nickname, uniqueness: {message: "は他の人が先に登録しているみたい..."}
+  validates :email, uniqueness: {message: "は他の人が先に登録しているみたい..."}, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: "は正しくないよ！", allow_blank: true}, on: :update
+  validates :nickname, uniqueness: {message: "は他の人が先に登録しているみたい..."}, format: { with: /\A[A-Za-z\w_-]+\z/i, message: "は正しくないよ！" }, length: {minimum: 3, message: "は3文字以上で入力してください"}
   has_many :posts, dependent: :destroy
 
 
@@ -18,7 +18,7 @@ class User < ApplicationRecord
    self.find_or_create_by(provider: provider,uid: uid) do |user|
      user.nickname = nickname
      user.username = username
-     user.image = image_url
+     user.image_url = image_url
      user.password = "password"
    end
   end
@@ -40,8 +40,10 @@ class User < ApplicationRecord
   end
 
   def add_presence_errors
-    if username.empty?
-      errors.add(:username, "を知りたい！")
+    if nickname.empty?
+      errors.add(:nickname, "を教えてください！")
+    elsif username.empty?
+      errors.add(:username, "を教えてください！")
     end
   end
 

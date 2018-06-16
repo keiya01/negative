@@ -20,5 +20,5 @@
       br
       = f.label :body, "秘密・思い(100文字まで)※任意"
       = f.text_area :body, placeholder: '正解した人に伝えたいことがあれば入力してください！(例：実は○○さんのことが好きです。)※ここの部分は問題に正解した人しか見ることが出来ません。', maxlength: 100, rows: 3
-      
+
   	  = f.submit value: 'つぶやく', data: { disable_with: "作成中..." }, class: 'button-simple'

@@ -6,6 +6,8 @@
     .comment-menu
       - if !comment_user.image.blank?
         = image_tag comment_user.image, class: 'post-user-img'
+      - elsif !comment_user.image_url.blank?
+        = image_tag comment_user.image_url, class: 'post-user-img'
       - else
         p.post-user-noimg = comment_user.username[0]
       p.post-user = link_to comment_user.username, "/users/#{comment_user.nickname}", class: "border-none btn-black"

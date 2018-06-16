@@ -236,6 +236,22 @@ textarea{
 	border: 1.5px solid #4169e1;
 	font-size: 16px;
 }
+.form-area .email-text{
+	margin-bottom: 20px;
+}
+.form-area input[type="file"]{
+	margin-top: 5px;
+}
+.self-image{
+	display: inline-block;
+	color: white !important;
+    background-color: #CC3366;
+    padding: 8px 20px;
+	border-radius: 12px;
+}
+.select-image{
+	background-color: #B6FF01;
+}
 .form-area input[type="text"]:focus{
 	outline: none;
 	border: 1.5px solid #B6FF01;

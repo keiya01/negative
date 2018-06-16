@@ -28,22 +28,41 @@ $(document).on('turbolinks:load', function() {
 		$('#delete-modal').find('form').attr('action', '/posts/'+$id+'/check');
 		$('#delete-modal').find('textarea').attr('placeholder', '問題： '+$question);
 		$('#delete-modal-form').show();
+		$('#delete-modal-form').addClass('active');
 		$('html, body').css('overflow', 'hidden');
 	});
 	$('.undelete-btn').on('click', function(){
 		$('#delete-modal-form').hide();
+		$('#delete-modal-form').removeClass('active');
 	    $('html, body').css('overflow', 'auto');
 	});
 
 	//regist-modal
 	$('.self-regist-btn').on('click', function(){
 		$('#user-regist-modal').show();
+		$('#user-regist-modal').addClass('active');
 		$('html, body').css('overflow', 'hidden');
 	});
 	$('.unregist-btn').on('click', function(){
 		$('#user-regist-modal').hide();
+		$('#user-regist-modal').removeClass('active');
 	    $('html, body').css('overflow', 'auto');
 	});
+
+	// closed modal
+	function closedModal(modal){
+		$('.modal').on('click', function(e){
+			var setModal = $(e.target).find(modal);
+			console.log(setModal);
+			if($('.modal').hasClass('active') && !$(e.target).closest(setModal).length && setModal.length){
+				$('.modal').hide();
+				$('.modal').removeClass('active');
+				$('html, body').css('overflow', 'auto');
+			}
+		});
+	}
+	closedModal('#delete-modal');
+	closedModal('#regist-modal');
 
 	// flash
 	function headerFlash(flash){
@@ -84,8 +103,13 @@ $(document).on('turbolinks:load', function() {
         reseze: false,
         // falseでリサイズした時にサイズ変更しない。デフォルトはtrue。
 
-        autoPlay: 1500
+        autoPlay: false
         // trueで3秒間隔で自動スクロール。秒数を指定したい場合は1500などミリ秒で指定する。デフォルトはfalse。
 
   });
+
+	$('.self-image').on('change', function(){
+		$('.self-image').addClass('select-image').text('ファイル選択中');
+	});
+
 });

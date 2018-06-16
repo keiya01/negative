@@ -19,29 +19,29 @@ class UsersController < ApplicationController
 
 	def create
     if params[:auth] == 'self'
-      self_user = User.new(user_params)
+      @user = User.new(user_params)
     else
-      twitter_user = User.find_or_create_from_auth_hash(request.env['omniauth.auth'])
+      @user = User.find_or_create_from_auth_hash(request.env['omniauth.auth'])
       twitter_info = request.env['omniauth.auth']
       twitter_nickname = twitter_info['info']['nickname']
       twitter_username = twitter_info['info']['name']
       twitter_image = twitter_info['info']['image']
-      User.update(nickname: twitter_nickname) if user.nickname != twitter_nickname
-      User.update(username: twitter_username) if user.username != twitter_username
-      User.update(image: twitter_image) if user.image != twitter_image
+      @user.nickname = twitter_nickname if @user.nickname != twitter_nickname
+      @user.username = twitter_username if @user.username != twitter_username
+      @user.image = twitter_image if @user.image != twitter_image
     end
-    if twitter_user || self_user
-      session[:user_id] = user.id
-      remember user
+    if @user.save
+      session[:user_id] = @user.id
+      remember @user
     else
       render 'users/new'
       return
     end
-    if user.email.blank?
-      session[:new_user] = user.id
-      redirect_to "/users/#{user.nickname}/edit", notice: "Emailを登録してください"
-    elsif !user.email.blank?
-        redirect_to "/users/#{user.nickname}", notice: "ログインしました！"
+    if @user.email.blank?
+      session[:new_user] = @user.id
+      redirect_to "/users/#{@user.nickname}/edit", notice: "Emailを登録してください"
+    elsif !@user.email.blank?
+        redirect_to "/users/#{@user.nickname}", notice: "ログインしました！"
     end
   end
 
@@ -51,6 +51,11 @@ class UsersController < ApplicationController
   def update
     if @user
       @user.email = params[:user][:email]
+      if !params[:user][:image].blank?
+        @user.image = params[:user][:image]
+        @user.image_url = nil
+      end
+
       if @user.save && session[:post_id]
         post = Post.find(session[:post_id])
         redirect_to "/posts/#{post.random_key}/check", notice: "正解です！"
@@ -83,7 +88,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require('user').permit(:nickname, :username, :password)
+    params.require(:user).permit(:nickname, :username, :password)
   end
 
   def find_user

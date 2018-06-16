@@ -22,6 +22,8 @@
       .post-menu
         - if !@user.image.blank?
           = image_tag @user.image, class: 'post-user-img'
+        - elsif !@user.image_url.blank?
+          = image_tag @user.image_url, class: 'post-user-img'
         - else
           p.post-user-noimg = @user.username[0]
         p.post-user = @user.username
@@ -46,6 +48,8 @@
       .post-menu
         - if !@user.image.blank?
           = image_tag @user.image, class: 'post-user-img'
+        - elsif !@user.image_url.blank?
+          = image_tag @user.image_url, class: 'post-user-img'
         - else
           p.post-user-noimg = @user.username[0]
         p.post-user = @user.username
