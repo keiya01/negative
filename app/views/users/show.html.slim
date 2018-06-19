@@ -2,8 +2,8 @@
   .user-contents
     - if !@user.image.blank?
       = image_tag @user.image, class: 'user-img'
-    - elsif !@user.image_url.blank?
-      = image_tag @user.image_url, class: 'user-img'
+    - elsif !@user.icon_url.blank?
+      = image_tag @user.icon_url, class: 'user-img'
     - else
       .user-noimg = @user.username[0]
     h3 = @user.username

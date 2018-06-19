@@ -6,15 +6,15 @@
       .post-menu
         - if !@user.image.blank?
           = image_tag @user.image, class: 'post-user-img'
-        - elsif !@user.image_url.blank?
-          = image_tag @user.image_url, class: 'post-user-img'
+        - elsif !@user.icon_url.blank?
+          = image_tag @user.icon_url, class: 'post-user-img'
         - else
           p.post-user-noimg = @user.username[0]
         p.post-user = link_to @user.username, "/users/#{@user.nickname}", class: "border-none btn-black"
         p.post-time = simple_time(@post.created_at)
         .clear-right.clear-left
   .post-comment
-    h3 メッセージ
+    h3.post-comment-title メッセージ
     #post-comment-lists
       = render partial: 'comments/comment'
     = form_for @comment, url: "/comments/#{@post.random_key}/create", remote: true do |f|
@@ -29,21 +29,30 @@
         = f.submit value: 'メッセージを送る', data: { disable_with: "送信中..." }, class: 'button-simple', id: "comment-btn"
         .clear-right
   .answerer-list
-    h5 あなたをよく知る人
+    h3.answerer-title あなたをよく知る人
     - @answerers.each do |answerer|
       .answerer
-        - if answerer.user_id != 0
+        - if !answerer.user_id == 0
           - @user = User.find(answerer.user_id)
-          = link_to "/users/#{@user.nickname}", class: "border-none" do
-            .answerer-user
-              - if !@user.image.blank?
-                = image_tag @user.image, class: 'answerer-img'
-              - elsif !@user.image_url.blank?
-                = image_tag @user.image_url, class: 'answerer-img'
-              - else
-                p.answerer-noimg = @user.username[0]
-              p.answerer-name = @user.username
-            .clear-left
+          - username = @user.username
+          - user_image = @user.image
+          - user_icon = @user.icon_url
+          - user_url = "/users/#{@user.nickname}"
+        - else
+          - username = guest_name_change(answerer.number)
+          - user_image = ""
+          - user_icon = ""
+          - user_url = "#"
+        = link_to user_url, class: "border-none" do
+          .answerer-user
+            - if !user_image.blank?
+              = image_tag user_image, class: 'answerer-img'
+            - elsif !user_icon.blank?
+              = image_tag user_icon, class: 'answer-img'
+            - else
+              h3.answerer-noimg = username[0]
+            h3.answerer-name = username
+          .clear-left
         .answerer-menu
           p.answerer-rank
            | 第

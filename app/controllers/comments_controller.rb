@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-  before_action :out_correct_user
 
   def create
   	@post = Post.find_by(random_key: params[:random_key])

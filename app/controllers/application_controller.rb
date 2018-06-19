@@ -34,8 +34,4 @@ class ApplicationController < ActionController::Base
   	end
   end
 
-  def out_correct_user
-    session[:correct_user] = nil if session[:correct_user]
-  end
-
 end

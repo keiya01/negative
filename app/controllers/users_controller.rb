@@ -4,12 +4,12 @@ class UsersController < ApplicationController
   before_action :brock_not_current_user, {only:[:edit, :update, :logout]}
   before_action :find_user, {only:[:show, :edit, :update, :brock_user]}
   before_action :brock_user, {only:[:edit, :update]}
-  before_action :out_correct_user
 
   def show
     posts = Post.where(user_id: @user.id).order(created_at: 'DESC')
     @posts = Kaminari.paginate_array(posts).page(params[:page]).per(15)
     @new_post = Post.find(session[:new_post]) if session[:new_post]
+    p "TEST: [#{session[:correct_user]}]"
   end
 
 	def new
@@ -28,8 +28,9 @@ class UsersController < ApplicationController
       twitter_image = twitter_info['info']['image']
       @user.nickname = twitter_nickname if @user.nickname != twitter_nickname
       @user.username = twitter_username if @user.username != twitter_username
-      @user.image = twitter_image if @user.image != twitter_image
+      @user.icon_url = twitter_image if @user.icon_url != twitter_image || @user.image.blank?
     end
+    
     if @user.save
       session[:user_id] = @user.id
       remember @user
@@ -50,10 +51,11 @@ class UsersController < ApplicationController
 
   def update
     if @user
+      @user.username = params[:user][:username]
       @user.email = params[:user][:email]
       if !params[:user][:image].blank?
         @user.image = params[:user][:image]
-        @user.image_url = nil
+        @user.icon_url = nil
       end
 
       if @user.save && session[:post_id]
@@ -88,7 +90,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:nickname, :username, :password)
+    params.require(:user).permit(:nickname, :username, :password, :icon_url, :image)
   end
 
   def find_user

@@ -3,7 +3,7 @@ class User < ApplicationRecord
   attr_accessor :remember_token
   has_secure_password
   validate :add_presence_errors
-  validates :email, uniqueness: {message: "は他の人が先に登録しているみたい..."}, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: "は正しくないよ！", allow_blank: true}, on: :update
+  validates :email, uniqueness: {message: "は他の人が先に登録しているみたい...", allow_blank: true}, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: "は正しくないよ！", allow_blank: true}, on: :update
   validates :nickname, uniqueness: {message: "は他の人が先に登録しているみたい..."}, format: { with: /\A[A-Za-z\w_-]+\z/i, message: "は正しくないよ！" }, length: {minimum: 3, message: "は3文字以上で入力してください"}
   has_many :posts, dependent: :destroy
 

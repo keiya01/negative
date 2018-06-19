@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   root 'users#new'
   post 'users/create/:auth' => 'users#create'
   get 'users/:nickname' => 'users#show'
-  get 'users/auth/:provider/callback' => 'users#create'
+  get '/auth/:provider/callback' => 'users#create'
   post 'logout' => 'users#logout'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

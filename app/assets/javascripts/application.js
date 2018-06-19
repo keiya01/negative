@@ -108,8 +108,8 @@ $(document).on('turbolinks:load', function() {
 
   });
 
-	$('.self-image').on('change', function(){
-		$('.self-image').addClass('select-image').text('ファイル選択中');
+	$('.edit-user-image').on('change', function(){
+		$('.self-image').addClass('select-image').html('ファイル選択中');
 	});
 
 });

@@ -24,4 +24,16 @@ module ApplicationHelper
       twitter_card
   	end
 
+  def guest_name_change(count)
+    if count == 1
+      "名前がわからない人"
+    elsif count == 2
+      "再び名前がわからない人"
+    elsif count == 3
+      "またまた名前がわからない人"
+    else
+      "ゲストの人"
+    end
+  end
+
 end

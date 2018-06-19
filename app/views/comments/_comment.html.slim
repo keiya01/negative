@@ -1,15 +1,25 @@
 - @comments.each do |comment|
-  - comment_user = User.find_by(id: comment.user_id)
+  - if !@comment.user_id == 0
+    - comment_user = User.find_by(id: comment.user_id)
+    - username = comment_user.username
+    - user_image = comment_user.image
+    - user_icon = comment_user.icon_url
+    - user_url = "/users/#{comment_user.nickname}"
+  - else
+    - username = "名前がわからない人"
+    - user_image = ""
+    - user_icon = ""
+    - user_url = "#"
   .comment
     .comment-contents
       p.post-body = html_escape(comment.body).gsub(/\n/, '<br>').html_safe
     .comment-menu
-      - if !comment_user.image.blank?
-        = image_tag comment_user.image, class: 'post-user-img'
-      - elsif !comment_user.image_url.blank?
-        = image_tag comment_user.image_url, class: 'post-user-img'
+      - if !user_image.blank?
+        = image_tag user_image, class: 'post-user-img'
+      - elsif !user_icon.blank?
+        = image_tag user_icon, class: 'post-user-img'
       - else
-        p.post-user-noimg = comment_user.username[0]
-      p.post-user = link_to comment_user.username, "/users/#{comment_user.nickname}", class: "border-none btn-black"
+        h3.post-user-noimg = username[0]
+      h3.post-user = link_to username, user_url, class: "border-none btn-black"
       p.post-time = simple_time(comment.created_at)
       .clear-right.clear-left

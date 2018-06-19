@@ -2,7 +2,7 @@
   - @user = User.find(post.user_id)
   - if post.count > post.check_count
     - @answerer = AnswerHistory.find_by(user_id: @current_user.id, post_id: post.id, check: true) if @current_user
-    - if @answerer || @current_user && @current_user.id == post.user_id
+    - if @answerer || @current_user && @current_user.id == post.user_id || session[:correct_user] == post.id
       .post
         = link_to "/posts/#{post.id}", class: "border-none" do
           .post-contents
@@ -17,8 +17,8 @@
           .post-username
             - if !@user.image.blank?
               = image_tag @user.image, class: 'post-user-img'
-            - elsif !@user.image_url.blank?
-              = image_tag @user.image_url, class: 'post-user-img'
+            - elsif !@user.icon_url.blank?
+              = image_tag @user.icon_url, class: 'post-user-img'
             - else
               p.post-user-noimg = @user.username[0]
             p.post-user = link_to @user.username, "/users/#{@user.nickname}", class: 'border-none btn-black'
@@ -40,8 +40,8 @@
           .post-username
             - if !@user.image.blank?
               = image_tag @user.image, class: 'post-user-img'
-            - elsif !@user.image_url.blank?
-              = image_tag @user.image_url, class: 'post-user-img'
+            - elsif !@user.icon_url.blank?
+              = image_tag @user.icon_url, class: 'post-user-img'
             - else
               p.post-user-noimg = @user.username[0]
             p.post-user = link_to @user.username, "/users/#{@user.nickname}", class: 'border-none btn-black'

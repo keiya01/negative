@@ -4,7 +4,6 @@ class PostsController < ApplicationController
   before_action :find_post, {only:[:show, :destroy, :check_answer, :brock_not_post_user]}
   before_action :find_answerer, {only:[:show, :check_answer]}
   before_action :brock_not_post_user, {only:[:destroy]}
-  before_action :out_correct_user, {except: [:show]}
 
   # def index
   # 	@posts = Post.page(params[:page]).per(15).order(created_at: "DESC")
