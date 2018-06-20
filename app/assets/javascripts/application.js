@@ -49,6 +49,12 @@ $(document).on('turbolinks:load', function() {
 	    $('html, body').css('overflow', 'auto');
 	});
 
+	$('#open-login-modal').on('click', function(){
+		$('#login-modal-form').show();
+		$('#login-modal-form').addClass('active');
+		$('html, body').css('overflow', 'hidden');
+	});
+
 	// closed modal
 	function closedModal(modal){
 		$('.modal').on('click', function(e){

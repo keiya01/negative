@@ -18,7 +18,7 @@ class User < ApplicationRecord
    self.find_or_create_by(provider: provider,uid: uid) do |user|
      user.nickname = nickname
      user.username = username
-     user.image_url = image_url
+     user.icon_url = image_url
      user.password = "password"
    end
   end

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post 'users/create/:auth' => 'users#create'
   get 'users/:nickname' => 'users#show'
   get '/auth/:provider/callback' => 'users#create'
+  post 'login' => 'users#login'
   post 'logout' => 'users#logout'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

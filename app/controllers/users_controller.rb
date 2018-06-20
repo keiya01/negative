@@ -30,20 +30,15 @@ class UsersController < ApplicationController
       @user.username = twitter_username if @user.username != twitter_username
       @user.icon_url = twitter_image if @user.icon_url != twitter_image || @user.image.blank?
     end
-    
+
     if @user.save
       session[:user_id] = @user.id
       remember @user
+      redirect_to "/users/#{@user.nickname}", notice: "ログインしました！"
     else
       render 'users/new'
-      return
     end
-    if @user.email.blank?
-      session[:new_user] = @user.id
-      redirect_to "/users/#{@user.nickname}/edit", notice: "Emailを登録してください"
-    elsif !@user.email.blank?
-        redirect_to "/users/#{@user.nickname}", notice: "ログインしました！"
-    end
+
   end
 
   def edit
