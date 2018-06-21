@@ -99,19 +99,24 @@ textarea{
 	width: 90%;
 	max-width: 480px;
 	border-radius: 20px;
-	padding-bottom: 30px;
 }
 #delete-modal{
 	margin-top: 100px;
-	padding: 0 50px;
+	padding: 0 30px;
+	padding-bottom: 30px;
 }
 #login-modal{
 	margin-top: 80px;
+	padding-bottom: 30px;
 }
 .common-modal h3{
 	font-size: 20px;
 	padding: 0 20px;
 	padding-top: 30px;
+}
+#delete-modal h3{
+	font-size: 18px;
+	text-align: left;
 }
 .common-modal p{
 	font-size: 15px;
@@ -198,6 +203,9 @@ textarea{
 		padding: 0;
 		padding-top: 30px;
 	}
+	#delete-modal h3{
+		text-align: center;
+	}
 	.common-delete-btn{
 		margin-top: 30px;
 		width: 40%;
@@ -238,6 +246,9 @@ textarea{
 .form-area label{
 	font-size: 15px;
 	color: #555;
+}
+label i{
+	color: #B6FF01;
 }
 .form-area .user-label{
 	padding-left: 5px;
