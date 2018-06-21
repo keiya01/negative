@@ -50,7 +50,7 @@
     = form_for @user, url: "/users/create/self" do |f|
       label for='user_nickname'
        i.fa.fa-id-card-o
-       |  ニックネーム(半角英数字で入力)
+       |  ユーザーID(半角英数字で入力)
       = f.text_field :nickname, placeholder: 'かぶらない値を入力してください！'
       br
       label for='user_username'

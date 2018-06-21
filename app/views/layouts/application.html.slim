@@ -47,11 +47,11 @@ html
     - if !@current_user && uri != '/' && uri != '/users/create/self'
       footer
         .footer-btn
-          p.footer-signup = link_to 'サインアップ', '/', class: 'border-none btn-white'
-          p.footer-login = link_to 'ログイン', "#", class: 'border-none btn-white', id: 'open-login-modal', disabled: true
+          = link_to 'サインアップ', '/', class: 'border-none btn-white footer-common-btn footer-signup'
+          .footer-login.btn-white.footer-common-btn#open-login-modal ログイン
 
   .modal#delete-modal-form
-    #delete-modal
+    #delete-modal.common-modal
       h3 問題に正解すると投稿を見ることができます!
       = form_tag "#" do
         textarea name="answer" placeholder='' maxlength='150'
@@ -59,13 +59,31 @@ html
           input type="hidden" name="uri" value="#{uri}"
           input type="submit" value='解答する' data-disable-with="照合中..." class='common-delete-btn delete-btn border-none btn-white'
           p.common-delete-btn.undelete-btn やめる
-  .modal#login-modal-form
-    #login-modal
-      h3 ログイン!
-      = form_tag "/login" do
-        input type="text" name="nickname" placeholder='ユーザーIDを入力'
-        input type="password" name="password" placeholder='パスワードを入力'
-        .btn-zone
-          input type="submit" value='ログイン' data-disable-with="照合中..." class='common-delete-btn delete-btn border-none btn-white'
-          p.common-delete-btn.undelete-btn = link_to 'ログイン', "/auth/twitter", class: 'border-none btn-white'
+  - error_style = 'display: block;' if flash[:login_error]
+  .modal#login-modal-form style="#{error_style}"
+    #login-modal.common-modal
+      h3
+       i.fa.fa-user-o
+       |  ログイン 
+       i.fa.fa-user-o
+      .login-form.form-area
+        - if flash[:login_error]
+          .error
+            p = flash[:login_error]
+        = form_tag "/login" do
+          label
+           i.fa.fa-hand-o-right
+           |  ユーザーID
+          input type="text" name="nickname" placeholder='ユーザーIDを入力'
+          label
+           i.fa.fa-hand-o-right
+           |  パスワード
+          input type="password" name="password" placeholder='パスワードを入力'
+          button type="submit" data-disable-with="照合中..." class='common-login-btn delete-btn border-none btn-white'
+           i.fa.fa-user
+           |  ログイン
+          = link_to "/auth/twitter", class: 'border-none btn-white' do
+            button.common-login-btn.twitter-login-btn
+             i.fa.fa-twitter
+             |  Twitterでログイン
   = yield

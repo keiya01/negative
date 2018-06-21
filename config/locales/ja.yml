@@ -42,7 +42,7 @@ ja:
         random_key: もう一度
       user:
         email: そのメールアドレス
-        nickname: ニックネーム
+        nickname: ユーザーID
         username: あなたの名前
         password: パスワード
       comment:

@@ -69,6 +69,7 @@ $(document).on('turbolinks:load', function() {
 	}
 	closedModal('#delete-modal');
 	closedModal('#regist-modal');
+	closedModal('#login-modal');
 
 	// flash
 	function headerFlash(flash){

@@ -5,56 +5,55 @@
     - active_color = ''
   - @answerer = AnswerHistory.find_by(user_id: @current_user.id, post_id: post.id, check: true) if @current_user
   - @wrong_answerers = AnswerHistory.where(post_id: post.id, check: false)
-  - @wrong_answerers.each do |i|
-    - if @answerer || @current_user && @current_user.id == post.user_id || session[:correct_user] == post.id
-      .user-post style="#{active_color}"
-        = link_to "/posts/#{post.random_key}", class: 'border-none' do
-          .post-contents
-            p.post-question = html_escape(post.question).gsub(/\n/, '<br>').html_safe
-          p.post-count
-            = post.check_count
-            | /
-            = post.count
-            | 人が正解
-          .clear-right
-        .post-menu
-          - if !@user.image.blank?
-            = image_tag @user.image, class: 'post-user-img'
-          - elsif !@user.icon_url.blank?
-            = image_tag @user.icon_url, class: 'post-user-img'
-          - else
-            p.post-user-noimg = @user.username[0]
-          p.post-user = @user.username
-          .wrong-space
-            p.wrong-user-list 
-             | 不正解者：
-             = @wrong_answerers.size
-             | 人
-          p.post-time = simple_time(post.created_at)
-          .clear-right.clear-left
-    - else
-      .user-post style="#{active_color}"
-        .post-box data-id="#{post.random_key}" data-question="#{post.question}"
-          .post-contents
-             p.post-question = html_escape(post.question).gsub(/\n/, '<br>').html_safe
-          p.post-count
-            = post.check_count
-            | /
-            = post.count
-            | 人が正解
-          .clear-right
-        .post-menu
-          - if !@user.image.blank?
-            = image_tag @user.image, class: 'post-user-img'
-          - elsif !@user.icon_url.blank?
-            = image_tag @user.icon_url, class: 'post-user-img'
-          - else
-            p.post-user-noimg = @user.username[0]
-          p.post-user = @user.username
-          .wrong-space
-            p.wrong-user-list 
-             | 不正解者：
-             = @wrong_answerers.size
-             | 人
-          p.post-time = simple_time(post.created_at)
-          .clear-right.clear-left
+  - if @answerer || @current_user && @current_user.id == post.user_id || session[:correct_user] == post.id
+    .user-post style="#{active_color}"
+      = link_to "/posts/#{post.random_key}", class: 'border-none' do
+        .post-contents
+          p.post-question = html_escape(post.question).gsub(/\n/, '<br>').html_safe
+        p.post-count
+          = post.check_count
+          | /
+          = post.count
+          | 人が正解
+        .clear-right
+      .post-menu
+        - if !@user.image.blank?
+          = image_tag @user.image, class: 'post-user-img'
+        - elsif !@user.icon_url.blank?
+          = image_tag @user.icon_url, class: 'post-user-img'
+        - else
+          p.post-user-noimg = @user.username[0]
+        p.post-user = @user.username
+        .wrong-space
+          p.wrong-user-list 
+           | 不正解者：
+           = @wrong_answerers.size
+           | 人
+        p.post-time = simple_time(post.created_at)
+        .clear-right.clear-left
+  - else
+    .user-post style="#{active_color}"
+      .post-box data-id="#{post.random_key}" data-question="#{post.question}"
+        .post-contents
+           p.post-question = html_escape(post.question).gsub(/\n/, '<br>').html_safe
+        p.post-count
+          = post.check_count
+          | /
+          = post.count
+          | 人が正解
+        .clear-right
+      .post-menu
+        - if !@user.image.blank?
+          = image_tag @user.image, class: 'post-user-img'
+        - elsif !@user.icon_url.blank?
+          = image_tag @user.icon_url, class: 'post-user-img'
+        - else
+          p.post-user-noimg = @user.username[0]
+        p.post-user = @user.username
+        .wrong-space
+          p.wrong-user-list
+           | 不正解者：
+           = @wrong_answerers.size
+           | 人
+        p.post-time = simple_time(post.created_at)
+        .clear-right.clear-left
