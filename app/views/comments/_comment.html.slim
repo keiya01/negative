@@ -1,5 +1,5 @@
 - @comments.each do |comment|
-  - if @comment.user_id == 0
+  - if @comment.user_id.to_i == 0
     - username = "名前がわからない人"
     - user_image = ""
     - user_icon = ""

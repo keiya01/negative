@@ -34,7 +34,7 @@
     - @answerers.each do |answerer|
       - ranking += 1
       .answerer
-        - if answerer.user_id == 0
+        - if answerer.user_id.to_i == 0
           - username = guest_name_change(answerer.number)
           - user_image = ""
           - user_icon = ""
