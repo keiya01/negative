@@ -30,19 +30,21 @@
         .clear-right
   .answerer-list
     h3.answerer-title あなたをよく知る人
+    - ranking = 0
     - @answerers.each do |answerer|
+      - ranking += 1
       .answerer
-        - if !answerer.user_id == 0
+        - if answerer.user_id == 0
+          - username = guest_name_change(answerer.number)
+          - user_image = ""
+          - user_icon = ""
+          - user_url = "#"
+        - else
           - @user = User.find(answerer.user_id)
           - username = @user.username
           - user_image = @user.image
           - user_icon = @user.icon_url
           - user_url = "/users/#{@user.nickname}"
-        - else
-          - username = guest_name_change(answerer.number)
-          - user_image = ""
-          - user_icon = ""
-          - user_url = "#"
         = link_to user_url, class: "border-none" do
           .answerer-user
             - if !user_image.blank?
@@ -56,7 +58,7 @@
         .answerer-menu
           p.answerer-rank
            | 第
-           = answerer.number
+           = ranking
            | 位
           .clear-left
           p.answerer-time = simple_time(answerer.created_at)

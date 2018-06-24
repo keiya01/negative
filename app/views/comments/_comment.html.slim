@@ -1,15 +1,15 @@
 - @comments.each do |comment|
-  - if !@comment.user_id == 0
+  - if @comment.user_id == 0
+    - username = "名前がわからない人"
+    - user_image = ""
+    - user_icon = ""
+    - user_url = "#"
+  - else
     - comment_user = User.find_by(id: comment.user_id)
     - username = comment_user.username
     - user_image = comment_user.image
     - user_icon = comment_user.icon_url
     - user_url = "/users/#{comment_user.nickname}"
-  - else
-    - username = "名前がわからない人"
-    - user_image = ""
-    - user_icon = ""
-    - user_url = "#"
   .comment
     .comment-contents
       p.post-body = html_escape(comment.body).gsub(/\n/, '<br>').html_safe
